@@ -37,11 +37,11 @@
   }
 
   html {
-    @apply scroll-smooth;
+    @apply h-full scroll-smooth bg-white;
   }
 
   body {
-    @apply body-regular text-brand-black;
+    @apply h-full body-regular text-brand-black;
   }
 
   h1 {
