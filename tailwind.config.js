@@ -67,5 +67,8 @@ module.exports = {
       auto: 'auto',
     },
   },
-  plugins: [require('@tailwindcss/aspect-ratio')],
+  plugins: [require(
+    '@tailwindcss/aspect-ratio',
+    '@tailwindcss/forms',
+  )],
 }
