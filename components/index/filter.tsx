@@ -46,8 +46,7 @@ export function Filter({setCategory, setOrder}: any) {
   }
     response = await response.json()
 
-    console.log(response.body);
-    setCategories(response.body!)
+    setCategories(response.body)
   };
   getFilters()
   }, []);
