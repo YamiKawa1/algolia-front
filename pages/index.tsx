@@ -1,58 +1,56 @@
-import { Configure } from 'react-instantsearch-dom'
-
-import { Banner } from '@/components/banner/banner'
-import { ProductCardHitShowcase } from '@/components/product-card/product-card-hit'
-import { ProductsShowcase } from '@/components/products-showcase/products-showcase'
+import { useAtomValue } from 'jotai/utils'
+import { useState } from 'react'
+import type { GetServerSidePropsContext } from 'next'
+import dynamic from 'next/dynamic'
+import { Breadcrumb } from '@/components/@instantsearch/widgets/breadcrumb/breadcrumb'
+import { QueryRuleBanners } from '@/components/@instantsearch/widgets/query-rule-banners/query-rule-banners'
+import { Container } from '@/components/container/container'
+import { configAtom } from '@/config/config'
 import type { SearchPageLayoutProps } from '@/layouts/search-page-layout'
 import {
-  getStaticPropsPage,
+  getServerSidePropsPage,
   SearchPageLayout,
 } from '@/layouts/search-page-layout'
-import BannerImage from '@/public/static/images/home/banner.jpg'
 
-export default function Home(props: SearchPageLayoutProps) {
+const Filter = dynamic<any>(() =>
+  import(
+    '@/components/index/filter'
+  ).then((mod) => mod.Filter)
+)
+
+const GridProducts = dynamic<any>(() =>
+  import(
+    '@/components/index/gridProducts'
+  ).then((mod) => mod.GridProducts)
+)
+
+export default function Index(props: SearchPageLayoutProps) {
+  const { breadcrumbAttributes, refinementsLayoutAtom } = useAtomValue(configAtom)
+  const [category, setCategory] = useState('')
+  const [order, setOrder] = useState('')
   return (
     <SearchPageLayout {...props}>
-      <Configure
-        hitsPerPage={6}
-        // We cannot retrieve the user token at build time, so we disable perso
-        // feature to avoid an additional call to retrieve Algolia results at load time
-        enablePersonalization={false}
-        userToken={undefined}
-      />
+      <Container className="flex flex-col gap-2 laptop:mt-10 laptop:gap-10">
+        <Breadcrumb attributes={breadcrumbAttributes} />
 
-      <Banner
-        size="xl"
-        title="New<br />Collection"
-        subtitle="Spring/summer 2021"
-        image={BannerImage}
-        imageAlt="New Collection - Spring/Summer 2021"
-        fullWidth={true}
-        overlay={true}
-        classNameTitle="text-3xl font-normal tracking-wider leading-tight laptop:text-7xl"
-      />
+        <div className="flex flex-col">
+          <Filter 
+          setCategory={setCategory} 
+          setOrder={setOrder}
+          />
+          
+          <div className="flex-grow flex flex-col gap-2 laptop:gap-5">
 
-      <ProductsShowcase
-        title="New in shoes"
-        indexId="shoes"
-        query="shoes"
-        hitComponent={ProductCardHitShowcase}
-      />
-      <ProductsShowcase
-        title="Spring/summer 2021"
-        indexId="spring-summer-2021"
-        ruleContexts={['home-spring-summer-2021']}
-        className="laptop:bg-gray-50"
-        hitComponent={ProductCardHitShowcase}
-      />
-      <ProductsShowcase
-        title="Recommended for you"
-        indexId="recommended"
-        query="jacket"
-        hitComponent={ProductCardHitShowcase}
-      />
+            <GridProducts 
+            category={category} setCategory={setCategory} 
+            order={order} setOrder={setOrder}
+            />
+          </div>
+        </div>
+      </Container>
     </SearchPageLayout>
   )
 }
 
-export const getStaticProps = () => getStaticPropsPage(Home)
+export const getServerSideProps = (context: GetServerSidePropsContext) =>
+  getServerSidePropsPage(Index, context)

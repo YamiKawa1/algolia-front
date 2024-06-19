@@ -1,10 +1,7 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import {
   Dialog,
   DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
@@ -22,29 +19,10 @@ const SearchBar = dynamic<any>(() =>
   ).then((mod) => mod.SearchBar)
 )
 
-
+const BACKEND_URL = 'http://localhost:3333'
 const sortOptions = [
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
-]
-
-const filters = [
-  {
-    id: 'Medicina',
-    name: 'Medicina',
-  },
-  {
-    id: 'Material quirúrgico',
-    name: 'Material quirúrgico',
-  },
-  {
-    id: 'Belleza',
-    name: 'Belleza',
-  },
-  {
-    id: 'Cuidado personal',
-    name: 'Cuidado personal',
-  },
+  { name: 'Precio: Bajo-Alto', order: 'asc', current: false },
+  { name: 'Precio: Alto-Bajo', order: 'desc', current: false },
 ]
 
 function classNames(...classes) {
@@ -52,14 +30,27 @@ function classNames(...classes) {
 }
 
 //TODO category handler
-function categoryHandler() {
-
-}
 
 export type FilterProps = React.ReactNode
 
-export function Filter() {
+export function Filter({setCategory, setOrder}: any) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [categories, setCategories] = useState([])
+
+  useEffect(()=> {
+    const getFilters = async () => {
+    var response = await fetch(`${BACKEND_URL}/categories`)
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+  }
+    response = await response.json()
+
+    console.log(response.body);
+    setCategories(response.body!)
+  };
+  getFilters()
+  }, []);
 
   return (
     <div className="bg-white">
@@ -100,21 +91,25 @@ export function Filter() {
                     </button>
                   </div>
 
-                  {/* Filters */}
-                  <form className="ml-4">
                     <h3 className="sr-only">Categories</h3>
                     <ul role="list" className="px-2 py-3 font-medium text-gray-900">
                     </ul>
-                    {filters.map((section) => (
-                      <div key={section.id} className=" px-4 py-6">
+                    <div key={1000} className="px-4 py-6">
                         <h5 className="-mx-2 -my-3 flow-root">
-                          <button onClick={categoryHandler}>                          
-                            <span className="font-medium text-gray-900">{section.name}</span>
+                          <button onClick={() => setCategory('')}>                          
+                            <span className="font-medium text-gray-900">Todo</span>
+                          </button>
+                        </h5>
+                    </div>
+                    {categories.map((section) => (
+                      <div key={section!.id} className="px-4 py-6">
+                        <h5 className="-mx-2 -my-3 flow-root">
+                          <button onClick={() => setCategory(section!.id)}>                          
+                            <span className="font-medium text-gray-900">{section!.name}</span>
                           </button>
                         </h5>
                       </div>
                     ))}
-                  </form>
                 </DialogPanel>
               </TransitionChild>
             </div>
@@ -148,8 +143,8 @@ export function Filter() {
                     {sortOptions.map((option) => (
                         <MenuItem key={option.name}>
                           {({ focus }) => (
-                            <a
-                              href={option.href}
+                            <button
+                              onClick={() => setOrder(option.order)}
                               className={classNames(
                                 option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                 focus ? 'bg-gray-100' : '',
@@ -157,7 +152,7 @@ export function Filter() {
                               )}
                             >
                               {option.name}
-                            </a>
+                            </button>
                           )}
                         </MenuItem>
                       ))}
@@ -186,40 +181,6 @@ export function Filter() {
               Products
             </h2>
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              {/* Filters */}
-              <form className="hidden lg:block">
-                <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
-                </ul>
-
-                {filters.map((section) => (
-                  <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <DisclosureButton className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                            <span className="font-medium text-gray-900">{section.name}</span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon className="h-5 w-5" aria-hidden="true" />
-                              ) : (
-                                <PlusIcon className="h-5 w-5" aria-hidden="true" />
-                              )}
-                            </span>
-                          </DisclosureButton>
-                        </h3>
-                        <DisclosurePanel className="pt-6">
-                          <div className="space-y-4">
-                            
-                          </div>
-                        </DisclosurePanel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
-              </form>
-            </div>
           </section>
         </main>
       </div>
