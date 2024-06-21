@@ -10,6 +10,8 @@ import { useSearchClient } from '@/hooks/useSearchClient'
 import { useSearchInsights } from '@/hooks/useSearchInsights'
 import { createInitialValues } from '@/utils/createInitialValues'
 import { appId, searchApiKey } from '@/utils/env'
+import store from '@/app/store'
+import { Provider } from 'react-redux'
 
 export type AppLayoutProps = {
   children: React.ReactNode
@@ -43,16 +45,19 @@ export function AppLayout({ children }: AppLayoutProps) {
   })
 
   return (
-    <JotaiProvider initialValues={get()}>
-      <LazyMotion features={loadFramerMotionFeatures} strict={true}>
-        {isMounted() ? (
-          children
-        ) : (
-          <ResponsiveContext.Provider value={{ width: 1440, height: 980 }}>
-            {children}
-          </ResponsiveContext.Provider>
-        )}
-      </LazyMotion>
-    </JotaiProvider>
+      <JotaiProvider initialValues={get()}>
+          <Provider store={store}>
+
+        <LazyMotion features={loadFramerMotionFeatures} strict={true}>
+          {isMounted() ? (
+            children
+          ) : (
+            <ResponsiveContext.Provider value={{ width: 1440, height: 980 }}>
+              {children}
+            </ResponsiveContext.Provider>
+          )}
+        </LazyMotion>
+        </Provider>
+      </JotaiProvider>
   )
 }

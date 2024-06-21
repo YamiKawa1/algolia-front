@@ -24,6 +24,7 @@ export function Header() {
       )}
       ref={setObservedNode}
     >
+      
       <Nav />
     </header>
   )

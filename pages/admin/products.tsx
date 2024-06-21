@@ -18,6 +18,13 @@ const ShowProducts = dynamic<any>(() =>
   ).then((mod) => mod.ShowProducts)
 )
 
+const ShowCategories = dynamic<any>(() =>
+  import(
+    '@/components/admin/show-categories'
+  ).then((mod) => mod.ShowCategories)
+)
+
+
 
 export default function Catalog(props: SearchPageLayoutProps) {
   return (
@@ -25,6 +32,7 @@ export default function Catalog(props: SearchPageLayoutProps) {
       <Container className="flex flex-col gap-2 laptop:mt-10 laptop:gap-10">
         <NavBottom />
         <ShowProducts />
+        <ShowCategories />
       </Container>
     </SearchPageLayout>
   )

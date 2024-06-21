@@ -5,7 +5,6 @@ export function Nav() {
   return (
     <nav>
       <NavTop />
-      <NavBottom />
     </nav>
   )
 }

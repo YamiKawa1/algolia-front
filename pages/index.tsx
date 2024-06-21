@@ -7,6 +7,7 @@ import { QueryRuleBanners } from '@/components/@instantsearch/widgets/query-rule
 import { Container } from '@/components/container/container'
 import { configAtom } from '@/config/config'
 import type { SearchPageLayoutProps } from '@/layouts/search-page-layout'
+
 import {
   getServerSidePropsPage,
   SearchPageLayout,

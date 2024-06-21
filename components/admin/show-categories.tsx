@@ -22,14 +22,14 @@ export type ShowCategoriesProps = React.ReactNode;
 
 export function ShowCategories() {
     return (
-        <Container className="flex flex-col gap-2 laptop:mt-10 laptop:gap-10">
+        <Container className="flex flex-col gap-3 laptop:mt-10 laptop:gap-8">
             <section className="py-1 bg-blueGray-50">
               <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
                   <div className="rounded-t mb-0 px-4 py-3 border-0">
                     <div className="flex flex-wrap items-center">
                       <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                        <h3 className="font-semibold text-base text-blueGray-700">Categorias</h3>
+                        <h4 className="font-semibold text-base text-blueGray-700">Categorias</h4>
                       </div>
                       <div className='w-80'>
                       <SearchBar />

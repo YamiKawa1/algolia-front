@@ -25,9 +25,7 @@ const BACKEND_URL = 'http://localhost:3333'
 export const GridProducts = memo(function GridProducts({
     animation = true,
     order,
-    setOrder,
     category,
-    setCategory
 }) {
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)

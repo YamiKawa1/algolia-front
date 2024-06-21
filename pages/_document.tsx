@@ -33,29 +33,6 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#5468ff" />
 
           {/* Icons */}
-          <link
-            rel="apple-touch-icon"
-            href="/static/icons/apple-touch-icon.png"
-          />
-          <link rel="shortcut icon" href="/favicon.ico" />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/static/icons/icon-16x16.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/static/icons/icon-32x32.png"
-          />
-          <link
-            rel="mask-icon"
-            href="/static/icons/safari-pinned-tab.svg"
-            color="#5468ff"
-          />
-          <link rel="manifest" href="/static/icons/manifest.json" />
 
           {/* OG meta */}
           <meta property="og:type" content="website" />

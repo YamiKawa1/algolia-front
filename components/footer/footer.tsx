@@ -1,6 +1,5 @@
 import { memo } from 'react'
 
-import { LogoSymbol } from '@/components/logo/logo'
 import { Link } from '@ui/link/link'
 
 export type FooterProps = Record<string, unknown>
@@ -32,7 +31,7 @@ export const Footer = memo(function Footer() {
 
       <div className="bg-brand-black flex flex-col items-center justify-center gap-3 py-8 laptop:py-9">
         <Link href="/" title="Spencer and Williams">
-          <LogoSymbol />
+          {/* MAYBE TODO: LOGO */} 
         </Link>
 
         <ul className="text-white text-center laptop:hidden">

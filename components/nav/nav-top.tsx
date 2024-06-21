@@ -1,102 +1,112 @@
-import FavoriteIcon from '@material-design-icons/svg/outlined/favorite_border.svg'
-import HeadsetMicIcon from '@material-design-icons/svg/outlined/headset_mic.svg'
+import LogoutIcon from '@material-design-icons/svg/outlined/logout.svg'
+import RegisterIcon from '@material-design-icons/svg/outlined/app_registration.svg'
 import PersonIcon from '@material-design-icons/svg/outlined/person.svg'
 import PinDropIcon from '@material-design-icons/svg/outlined/pin_drop.svg'
-import ShoppingBagIcon from '@material-design-icons/svg/outlined/shopping_bag.svg'
-import dynamic from 'next/dynamic'
-import { memo } from 'react'
+import LoginIcon from '@material-design-icons/svg/outlined/login.svg'
+import ShoppingCartIcon from '@material-design-icons/svg/outlined/shopping_cart.svg'
 
-import type { LogoProps } from '@/components/logo/logo'
-import { NavItem } from '@/components/nav/nav-item'
+import { memo, useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setActive } from '@/app/cartSlice';
+
 import { Tablet, Laptop } from '@/lib/media'
 import { Button } from '@ui/button/button'
 import { IconLabel } from '@ui/icon-label/icon-label'
-import { Link } from '@ui/link/link'
+import Link from 'next/link'
 
-const Logo = dynamic<LogoProps>(() =>
-  import(/* webpackChunkName: 'common' */ '@/components/logo/logo').then(
-    (mod) => mod.Logo
-  )
-)
+// useEffect(() => {
+//   const [token, setToken] = useState(localStorage.getItem('token'))
 
-export const NavTop = memo(function NavTop() {
+// })
+
+export function NavTop() {
+  const Cart = useSelector((state:any) => state.cart)
+  const dispatch = useDispatch()
+
   return (
-    <div className="flex flex-col px-4 py-2 border-b border-neutral-light laptop:mx-20 laptop:px-0 laptop:pt-8 laptop:pb-0 laptop:mb-5">
-      <div className="flex justify-between w-full gap-3 laptop:mb-8">
+    <div className="flex flex-col px-4 py-2 laptop:mx-20 laptop:px-0 laptop:pb-0 laptop:mb-5">
+      <div className="flex justify-between w-full gap-3">
         <div className="flex items-center">
-          <Logo />
+          {/* TODO <Logo /> */}
+          <Link href="/">
+            <Button title="Home">
+              <img src="/static/images/socials/logo.png" alt="" width="80" />
+            </Button>
+          </Link>
         </div>
 
         <div className="flex gap-48">
           <div className="hidden items-center gap-8 laptop:flex">
-            <Link
-              href="/support"
-              title="Support"
-              className="can-hover:transition-colors can-hover:hover:text-neutral-dark"
-              onClick={(e) => e.preventDefault()}
-            >
-              <IconLabel
-                icon={HeadsetMicIcon}
-                label="Support"
-                labelPosition="right"
-                classNameLabel="label-regular"
-              />
-            </Link>
-            <Link
-              href="/store-locator"
-              title="Find a store"
-              className="can-hover:transition-colors can-hover:hover:text-neutral-dark"
-              onClick={(e) => e.preventDefault()}
-            >
+            <a href="https://maps.app.goo.gl/2tWy9tY6sbE5LfRU6" target="_blank" rel="noopener noreferrer">
               <IconLabel
                 icon={PinDropIcon}
                 label="Find a store"
                 labelPosition="right"
                 classNameLabel="label-regular"
               />
-            </Link>
+            </a>
           </div>
 
           <div className="flex items-center gap-6 laptop:gap-3">
             <Tablet>
-              <Button title="Stores">
-                <IconLabel icon={PinDropIcon} label="Stores" />
-              </Button>
+            <a href="https://maps.app.goo.gl/2tWy9tY6sbE5LfRU6" target="_blank" rel="noopener noreferrer">
+            <Button title="Stores">
+              <IconLabel icon={PinDropIcon} label="Stores" />
+            </Button>
+            </a>
             </Tablet>
-            <Laptop>
-              <Button title="Favorites">
-                <IconLabel icon={FavoriteIcon} />
+            {/* TODO if user connected */}
+            <Link href="/profile">
+              <Button title="Perfil">
+                <Tablet>
+                  <IconLabel icon={PersonIcon} label="Perfil" />
+                </Tablet>
+                <Laptop>
+                  <IconLabel icon={PersonIcon} />
+                </Laptop>
               </Button>
-            </Laptop>
-
-            <Button title="Account">
+            </Link>
+            <Link href="/auth/sign-up">
+              <Button title="Registrar">
+                <Tablet>
+                  <IconLabel icon={RegisterIcon} label="Registrar" />
+                </Tablet>
+                <Laptop>
+                  <IconLabel icon={RegisterIcon} />
+                </Laptop>
+              </Button>
+            </Link>
+            <Link href="/auth/sign-in">
+              <Button title="Entrar">
+                <Tablet>
+                  <IconLabel icon={LoginIcon} label="Entrar" />
+                </Tablet>
+                <Laptop>
+                  <IconLabel icon={LoginIcon} />
+                </Laptop>
+              </Button>
+            </Link>
+            <Button title="Salir">
               <Tablet>
-                <IconLabel icon={PersonIcon} label="Account" />
+                <IconLabel icon={LogoutIcon} label="Salir" />
               </Tablet>
               <Laptop>
-                <IconLabel icon={PersonIcon} />
+                <IconLabel icon={LogoutIcon} />
               </Laptop>
             </Button>
 
+
             <Button title="Cart">
               <Tablet>
-                <IconLabel icon={ShoppingBagIcon} label="Cart" />
+                <IconLabel icon={ShoppingCartIcon} label="Cart" />
               </Tablet>
               <Laptop>
-                <IconLabel icon={ShoppingBagIcon} />
+                <IconLabel icon={ShoppingCartIcon} />
               </Laptop>
             </Button>
           </div>
         </div>
       </div>
-
-      <nav className="hidden laptop:block">
-        <ul className="hidden gap-6 uppercase laptop:flex">
-          <NavItem label="Women" href="/catalog/Women" />
-          <NavItem label="Men" href="/catalog/Men" />
-          <NavItem label="Accessories" href="/catalog/Accessories" />
-        </ul>
-      </nav>
     </div>
   )
-})
+};

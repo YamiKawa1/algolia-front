@@ -29,27 +29,14 @@ export function ProductCardHitComponent({
   const product: ProductCardProps = {
     url: `/product/${hit.objectID}?queryID=${hit.__queryID}`,
     image: hit.image_urls[0],
-    tags: [],
-    colors: [],
     price: hit.price.value,
     currency: {
-      symbol: hit.price.currency === 'EUR' ? '€' : '$',
-      position: hit.price.currency === 'EUR' ? 'suffix' : 'prefix',
+      symbol: '$',
+      position: 'prefix',
     },
-    rating: hit.reviews.rating,
-    reviews: hit.reviews.count,
+   
   }
 
-  // On sales
-  if (hit.price.on_sales) {
-    product.originalPrice = hit.price.value
-    product.price = hit.price.discounted_value
-
-    product.tags?.push({
-      label: `on sale ${hit.price.discount_level}%`,
-      theme: 'on-sale',
-    } as ProductTagType)
-  }
 
   // Highlighting
   if (highlighting) {

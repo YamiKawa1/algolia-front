@@ -2,7 +2,7 @@ export default function Example() {
     return (
       <>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mx-10 px-10">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="laptop:mx-auto laptop:w-full laptop:max-w-sm">
             <img
               className="mx-auto h-10 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"

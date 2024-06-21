@@ -26,19 +26,6 @@ function QueryRuleBannersComponent({
 
   return (
     <div className="flex flex-col">
-      {slicedItems.map(({ title, description, image }) => (
-        <Banner
-          key={image}
-          size={isLaptop ? 'l' : 's'}
-          title={title}
-          description={description}
-          image={isLaptop ? image.desktop : image.mobile}
-          imageAlt={title}
-          fullWidth={true}
-          overlay={true}
-          gradient={true}
-        />
-      ))}
     </div>
   )
 }
