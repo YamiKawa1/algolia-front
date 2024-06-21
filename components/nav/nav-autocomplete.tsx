@@ -7,7 +7,6 @@ import { useAtomValue, useUpdateAtom } from 'jotai/utils'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 
-import { searchQueryAtom } from '@/components/@instantsearch/hooks/useUrlSync'
 import { overlayAtom } from '@/components/overlay/overlay'
 import { configAtom } from '@/config/config'
 import { useIsMounted } from '@/hooks/useIsMounted'
@@ -37,7 +36,6 @@ export function NavAutocomplete() {
 
   // Get app state
   const { autocomplete: autocompleteConfig } = useAtomValue(configAtom)
-  const { current: initialQuery } = useRef(useAtomValue(searchQueryAtom))
   const searchClient = useAtomValue(searchClientAtom) as SearchClient
 
   // Autocomplete expand on focused
@@ -101,15 +99,6 @@ export function NavAutocomplete() {
       transition={transition}
     >
       <div className="hidden absolute w-24 h-full -translate-x-full bg-gradient-to-l from-white laptop:block" />
-      <AutocompleteBasic
-        initialQuery={initialQuery}
-        searchClient={searchClient}
-        placeholders={autocompleteConfig.placeholders}
-        shouldPanelOpen={handleShouldPanelOpen}
-        openOnFocus={!isLaptop}
-        onFocusBlur={handleFocusBlur}
-        onSelect={handleSelect}
-      />
     </m.div>
   )
 }

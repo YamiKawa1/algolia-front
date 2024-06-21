@@ -6,7 +6,7 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 export type HeaderProps = Record<string, unknown>
 
-export function Header() {
+export function Header({setIsOpen}:any) {
   const [isSticky, setIsSticky] = useState(false)
 
   const { setObservedNode } = useIntersectionObserver({
@@ -25,7 +25,7 @@ export function Header() {
       ref={setObservedNode}
     >
       
-      <Nav />
+      <Nav setIsOpen={setIsOpen} />
     </header>
   )
 }

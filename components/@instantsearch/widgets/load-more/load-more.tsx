@@ -7,7 +7,6 @@ import { useAtomValue } from 'jotai/utils'
 import { memo, useCallback, useEffect, useRef } from 'react'
 
 import { withDebugLayer } from '@/components/@dev/debug-layer/debug-layer'
-import { searchQueryAtom } from '@/components/@instantsearch/hooks/useUrlSync'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { Button } from '@ui/button/button'
 
@@ -37,12 +36,6 @@ function LoadMoreButton({
     loadMoreClicked.current = true
     refineNext()
   }, [refineNext])
-
-  const searchQuery = useAtomValue(searchQueryAtom)
-  useEffect(() => {
-    refineCounter.current = 0
-    loadMoreClicked.current = false
-  }, [searchQuery])
 
   return (
     <Button

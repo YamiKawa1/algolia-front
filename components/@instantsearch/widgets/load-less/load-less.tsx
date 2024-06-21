@@ -4,7 +4,6 @@ import type { InfiniteHitsProvided } from 'react-instantsearch-core'
 
 import { Button } from '@/components/@ui/button/button'
 import type { ProductCardHitProps } from '@/components/product-card/product-card-hit'
-import { searchStateAtom } from '@instantsearch/hooks/useUrlSync'
 import { isSearchStalledAtom } from '@instantsearch/widgets/virtual-state-results/virtual-state-results'
 
 export type LoadLessProps = Pick<
@@ -13,17 +12,8 @@ export type LoadLessProps = Pick<
 >
 
 export function LoadLess({ hasPrevious, refinePrevious }: LoadLessProps) {
-  const setSearchState = useUpdateAtom(searchStateAtom)
   const isSearchStalled = useAtomValue(isSearchStalledAtom)
 
-  const handleGoToFirstPage = useCallback(
-    () =>
-      setSearchState((currentSearchState) => ({
-        ...currentSearchState,
-        page: 1,
-      })),
-    [setSearchState]
-  )
 
   if (!hasPrevious) return null
 
@@ -32,7 +22,6 @@ export function LoadLess({ hasPrevious, refinePrevious }: LoadLessProps) {
       <Button
         type="secondary"
         disabled={isSearchStalled}
-        onClick={handleGoToFirstPage}
       >
         Go to first page
       </Button>

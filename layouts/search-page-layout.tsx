@@ -7,10 +7,8 @@ import type {
 import { memo, useMemo } from 'react'
 import isEqual from 'react-fast-compare'
 
-import { useUrlSync } from '@/components/@instantsearch/hooks/useUrlSync'
 import { configAtom } from '@/config/config'
 import { useUserToken } from '@/hooks/useUserToken'
-import { isBrowser } from '@/utils/browser'
 import { appId, searchApiKey, indexName } from '@/utils/env'
 import { getResultsState } from '@/utils/getResultsState'
 import { Search } from '@instantsearch/search'
@@ -35,7 +33,6 @@ function SearchPageLayoutComponent({
 }: SearchPageLayoutProps) {
   const { searchParameters: configSearchParameters } = useAtomValue(configAtom)
   const searchClient = useAtomValue(searchClientAtom)
-  const { searchState, onSearchStateChange, createURL } = useUrlSync()
   const userTokenHookValue = useUserToken()
   const userToken = userTokenHookValue ? userTokenHookValue : initialUserToken
 
@@ -53,11 +50,8 @@ function SearchPageLayoutComponent({
       <Search
         indexName={indexName}
         searchClient={searchClient}
-        searchState={isBrowser ? searchState : initialSearchState}
         searchParameters={searchParameters}
         resultsState={resultsState}
-        createURL={createURL}
-        onSearchStateChange={onSearchStateChange}
         {...props}
       >
         {children}

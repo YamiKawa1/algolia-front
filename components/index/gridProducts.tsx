@@ -96,7 +96,7 @@ export const GridProducts = memo(function GridProducts({
                 ))}
             </AnimatePresence>
             </m.ol>
-            <nav className='flex justify-center'>
+            <nav className='flex justify-center mb-10'>
                 <ul className="flex items-center -space-x-px h-10 text-base">
                     {Array(pageNumber).fill(1).map((el, i) =>
                         <li key={i}> 
