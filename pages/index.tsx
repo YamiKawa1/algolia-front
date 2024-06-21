@@ -1,13 +1,10 @@
-import { useAtomValue } from 'jotai/utils'
 import { useState } from 'react'
 import type { GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
-import { Breadcrumb } from '@/components/@instantsearch/widgets/breadcrumb/breadcrumb'
-import { QueryRuleBanners } from '@/components/@instantsearch/widgets/query-rule-banners/query-rule-banners'
+import { Banner } from '@/components/banner/banner'
 import { Container } from '@/components/container/container'
-import { configAtom } from '@/config/config'
 import type { SearchPageLayoutProps } from '@/layouts/search-page-layout'
-
+import logo from '@/public/static/images/banners/Banner.jpg'
 import {
   getServerSidePropsPage,
   SearchPageLayout,
@@ -26,14 +23,20 @@ const GridProducts = dynamic<any>(() =>
 )
 
 export default function Index(props: SearchPageLayoutProps) {
-  const { breadcrumbAttributes, refinementsLayoutAtom } = useAtomValue(configAtom)
+  const [categoryName, setCategoryName] = useState('')
   const [category, setCategory] = useState('')
   const [order, setOrder] = useState('')
   return (
     <SearchPageLayout {...props}>
-      <Container className="flex flex-col gap-2 laptop:mt-10 laptop:gap-10">
-        <Breadcrumb attributes={breadcrumbAttributes} />
+        <Banner 
+        size='xl'
+        fullWidth={true}
+        gradient = {true}
+        title={categoryName ? categoryName : 'Todo lo que necesitas'}
+        image={logo}
+        />
 
+      <Container className="flex flex-col gap-2 laptop:mt-10 laptop:gap-10">
         <div className="flex flex-col">
           <Filter 
           setCategory={setCategory} 
