@@ -3,11 +3,8 @@ import type { GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
 
 import { Breadcrumb } from '@/components/@instantsearch/widgets/breadcrumb/breadcrumb'
-import { InfiniteHits } from '@/components/@instantsearch/widgets/infinite-hits/infinite-hits'
-import { NoResultsHandler } from '@/components/@instantsearch/widgets/no-results-handler/no-results-handler'
 import { QueryRuleBanners } from '@/components/@instantsearch/widgets/query-rule-banners/query-rule-banners'
 import { Container } from '@/components/container/container'
-import { ProductCardHit } from '@/components/product-card/product-card-hit'
 import { viewModeAtom } from '@/components/view-modes/view-modes'
 import { configAtom } from '@/config/config'
 import type { SearchPageLayoutProps } from '@/layouts/search-page-layout'
@@ -50,15 +47,6 @@ export default function Catalog(props: SearchPageLayoutProps) {
             <RefinementsBar
               showRefinements={refinementsLayout === 'bar' && isLaptop}
             />
-
-            <NoResultsHandler>
-              <InfiniteHits
-                hitComponent={ProductCardHit}
-                viewMode={viewMode}
-                showLess={true}
-                showMore={true}
-              />
-            </NoResultsHandler>
           </div>
         </div>
       </Container>
