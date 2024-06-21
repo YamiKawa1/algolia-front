@@ -2,22 +2,16 @@ import { AnimatePresence } from 'framer-motion'
 import type { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Script from 'next/script'
-import { useMemo } from 'react'
+import { useState } from 'react'
 
 /// #if DEV
 // eslint-disable-next-line import/order
-import { Dev } from '@dev/dev'
 /// #endif
 
-import { Banner } from '@/components/banner/banner'
 import type { FooterProps } from '@/components/footer/footer'
 import type { HeaderProps } from '@/components/header/header'
 import type { CartProps } from '@/components/cart/cart'
-import { Loader } from '@/components/loader/loader'
-import { Overlay } from '@/components/overlay/overlay'
 import { AppLayout } from '@/layouts/app-layout'
-import { gaTrackingId, isDev, isProd } from '@/utils/env'
 import { scrollToTop } from '@/utils/scrollToTop'
 
 import '@/styles/_index.css'
@@ -39,14 +33,14 @@ export const Cart = dynamic<CartProps>(() =>
 )
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  const isCatalogPage = useMemo(
-    () => router?.pathname === '/catalog/[[...slugs]]',
-    [router?.pathname]
-  )
-
+  // const isCatalogPage = useMemo(
+  //   () => router?.pathname === '/catalog/[[...slugs]]',
+  //   [router?.pathname]
+  // )
+  const[isOpen, setIsOpen] = useState(false)
   return (
     <AppLayout>
-        <Cart />
+        <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
         <Head>
           <title>Farmacia Dr. Barreto</title>
           <meta
@@ -54,13 +48,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
             content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"
           />
         </Head>
-        <Header />
-
+        <Header setIsOpen={setIsOpen}/>
         <AnimatePresence exitBeforeEnter={true} onExitComplete={scrollToTop}>
           <Component {...pageProps} key={router.route} />
         </AnimatePresence>
-        <Loader layout={isCatalogPage ? 'bar' : 'overlay'} />
-        <Overlay />
     </AppLayout>
   )
 }

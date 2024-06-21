@@ -19,10 +19,7 @@ import Link from 'next/link'
 
 // })
 
-export function NavTop() {
-  // const Cart = useSelector((state:any) => state.cart)
-  // const dispatch = useDispatch()
-
+export function NavTop({setIsOpen}:any) {
   return (
     <div className="flex flex-col px-4 py-2 laptop:mx-20 laptop:px-0 laptop:pb-0 laptop:mb-5">
       <div className="flex justify-between w-full gap-3">
@@ -96,7 +93,7 @@ export function NavTop() {
             </Button>
 
 
-            <Button title="Cart">
+            <Button title="Cart" onClick={()=> {setIsOpen(true)}}> 
               <Tablet>
                 <IconLabel icon={ShoppingCartIcon} label="Cart" />
               </Tablet>

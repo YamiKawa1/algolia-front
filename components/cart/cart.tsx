@@ -28,12 +28,11 @@ const products = [
   // More products...
 ]
 
-export default function Cart() {
-  const [open, setOpen] = useState(true)
+export default function Cart({isOpen, setIsOpen}:any) {
 
   return (
-    <Transition show={open} as={Fragment}>
-      <Dialog className="relative z-header" onClose={setOpen}>
+    <Transition show={isOpen} as={Fragment}>
+      <Dialog className="relative z-header" onClose={setIsOpen}>
         <TransitionChild
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -67,7 +66,7 @@ export default function Cart() {
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => setIsOpen(false)}
                           >
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Close panel</span>
