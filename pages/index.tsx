@@ -41,6 +41,7 @@ export default function Index(props: SearchPageLayoutProps) {
           <Filter 
           setCategory={setCategory} 
           setOrder={setOrder}
+          setCategoryName={setCategoryName}
           />
           
           <div className="flex-grow flex flex-col gap-2 laptop:gap-5">
