@@ -8,50 +8,82 @@ export const Footer = memo(function Footer() {
   return (
     <footer className="mt-auto">
       <div className="hidden bg-neutral-lightest justify-between px-20 py-24 laptop:flex">
-        {Array.from(Array(6), (ei, i) => (
-          <div key={i} className="flex flex-col gap-2">
-            <div className="label-semibold">Footer {i + 1}</div>
-            <ul className="small-regular flex flex-col gap-2">
-              {Array.from(Array(3), (ej, j) => (
-                <li key={j}>
+        <div key={1} className="flex flex-col gap-2">
+            <div className="label-semibold">Contactos</div>
+              <ul className="small-regular flex flex-col gap-2">
+                <li>
                   <Link
-                    href={`/footer-link-${i + 1}-${j + 1}`}
-                    title={`Link ${j + 1}`}
+                    href={`/footer-link-${1 + 1}-${2 + 1}`}
+                    title={`Numero de telefono:`}
                     className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
                     onClick={(e) => e.preventDefault()}
                   >
-                    {`Link ${j + 1}`}
+                                        Numero de telefono:
                   </Link>
                 </li>
-              ))}
-            </ul>
+                <li>
+                  <Link
+                    href={`/footer-link-${1 + 1}-${2 + 1}`}
+                    title={`Link ${1 + 1}`}
+                    className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Correo:
+                  </Link>
+                </li>
+              </ul>
           </div>
-        ))}
-      </div>
-
-      <div className="bg-brand-black flex flex-col items-center justify-center gap-3 py-8 laptop:py-9">
-        <Link href="/" title="Spencer and Williams">
-          {/* MAYBE TODO: LOGO */} 
-        </Link>
-
-        <ul className="text-white text-center laptop:hidden">
-          <li>
-            <Link href="/" title="Home" className="block p-4">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about-us" title="About Us" className="block p-4">
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" title="Contact" className="block p-4">
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div>
+          <div key={1} className="flex flex-col gap-2">
+            <div className="label-semibold">Contactos</div>
+              <ul className="small-regular flex flex-col gap-2">
+                <li>
+                  <Link
+                    href={`/footer-link-${1 + 1}-${2 + 1}`}
+                    title={`Numero de telefono:`}
+                    className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                                        Numero de telefono:
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/footer-link-${1 + 1}-${2 + 1}`}
+                    title={`Link ${1 + 1}`}
+                    className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Correo:
+                  </Link>
+                </li>
+              </ul>
+          </div>
+          <div key={1} className="flex flex-col gap-2">
+            <div className="label-semibold">Contactos</div>
+              <ul className="small-regular flex flex-col gap-2">
+                <li>
+                  <Link
+                    href={`/footer-link-${1 + 1}-${2 + 1}`}
+                    title={`Numero de telefono:`}
+                    className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                                        Numero de telefono:
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/footer-link-${1 + 1}-${2 + 1}`}
+                    title={`Link ${1 + 1}`}
+                    className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Correo:
+                  </Link>
+                </li>
+              </ul>
+          </div>
+        </div>
     </footer>
   )
 })

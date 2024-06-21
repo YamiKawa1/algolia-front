@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
 import { Banner } from '@/components/banner/banner'
+import { Footer } from '@/components/footer/footer'
 import { Container } from '@/components/container/container'
 import type { SearchPageLayoutProps } from '@/layouts/search-page-layout'
 import logo from '@/public/static/images/banners/Banner.jpg'
@@ -53,6 +54,7 @@ export default function Index(props: SearchPageLayoutProps) {
           </div>
         </div>
       </Container>
+      <Footer />
     </SearchPageLayout>
   )
 }
