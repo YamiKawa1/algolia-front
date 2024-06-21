@@ -20,8 +20,8 @@ import Link from 'next/link'
 // })
 
 export function NavTop() {
-  const Cart = useSelector((state:any) => state.cart)
-  const dispatch = useDispatch()
+  // const Cart = useSelector((state:any) => state.cart)
+  // const dispatch = useDispatch()
 
   return (
     <div className="flex flex-col px-4 py-2 laptop:mx-20 laptop:px-0 laptop:pb-0 laptop:mb-5">
