@@ -9,7 +9,6 @@ import { useRouter } from 'next/router'
 import { memo, useCallback, useEffect, useMemo } from 'react'
 import type { SearchState } from 'react-instantsearch-core'
 
-import { searchStateAtom } from '@/components/@instantsearch/hooks/useUrlSync'
 import { configAtom } from '@/config/config'
 import { useDebouncedCallback } from '@/hooks/useDebouncedCallback'
 import { createAnimatedPlaceholderPlugin } from '@/lib/autocomplete/plugins/createAnimatedPlaceholderPlugin'
@@ -51,18 +50,7 @@ function AutocompleteBasicComponent({
   const isHomePage = useMemo(() => router?.pathname === '/', [router?.pathname])
   const { autocomplete: autocompleteConfig } = useAtomValue(configAtom)
 
-  const _setSearchState = useUpdateAtom(searchStateAtom)
 
-  const setSearchState = useDebouncedCallback(
-    (nextSearchState: SearchState) => {
-      _setSearchState((currentSearchState: SearchState) => ({
-        ...currentSearchState,
-        ...nextSearchState,
-        page: 1,
-      }))
-    },
-    autocompleteConfig.debouncing
-  )
 
   const recentSearchesPlugin = useMemo(
     () =>
@@ -153,7 +141,6 @@ function AutocompleteBasicComponent({
           autocompleteConfig.detachedMediaQuery
         ).matches
 
-        if (!isDetached) setSearchState({ query: state.query })
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

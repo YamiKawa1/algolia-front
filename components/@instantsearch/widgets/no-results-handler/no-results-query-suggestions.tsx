@@ -9,7 +9,6 @@ import { Button } from '@/components/@ui/button/button'
 import { Icon } from '@/components/@ui/icon/icon'
 import { configAtom } from '@/config/config'
 import { querySuggestionsIndexName } from '@/utils/env'
-import { searchStateAtom } from '@instantsearch/hooks/useUrlSync'
 
 export type NoResultsQuerySuggestionsProps = {
   query: string
@@ -24,14 +23,10 @@ export type NoResultsQuerySuggestionsHitButtonProps = {
 function NoResultsQuerySuggestionsHitButton({
   query,
 }: NoResultsQuerySuggestionsHitButtonProps) {
-  const setSearchState = useUpdateAtom(searchStateAtom)
 
-  const handleClick = useCallback(() => {
-    setSearchState((currentSearchState) => ({ ...currentSearchState, query }))
-  }, [setSearchState, query])
 
   return (
-    <Button className="underline" onClick={handleClick}>
+    <Button className="underline" >
       {query}
     </Button>
   )
