@@ -9,7 +9,6 @@ import isEqual from 'react-fast-compare'
 
 import { configAtom } from '@/config/config'
 import { useUserToken } from '@/hooks/useUserToken'
-import { isBrowser } from '@/utils/browser'
 import { appId, searchApiKey, indexName } from '@/utils/env'
 import { getResultsState } from '@/utils/getResultsState'
 import { Search } from '@instantsearch/search'
