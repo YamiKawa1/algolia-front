@@ -1,6 +1,20 @@
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { useEffect } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
+import {addItem} from '@/app/tokenSlice'
+
+import {usePathname} from 'next/navigation'
+
 
 export default function Profile() {
+  const token = useSelector((state) => state.token.token)
+
+  useEffect(()=> {
+    if (!token) {
+      redirect('/', 'push')
+    }
+  }, [])
+
   return (
     <div>
     <form>
@@ -9,8 +23,8 @@ export default function Profile() {
           <h1 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h1>
           <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-3">
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 tablet:grid-cols-6">
+            <div className="tablet:col-span-3">
               <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
                 Nombre
               </label>
@@ -20,12 +34,12 @@ export default function Profile() {
                   name="first-name"
                   id="first-name"
                   autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 tablet:text-sm tablet:leading-6"
                 />
               </div>
             </div>
 
-            <div className="sm:col-span-4">
+            <div className="tablet:col-span-3">
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
@@ -35,7 +49,8 @@ export default function Profile() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  disabled={true}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 tablet:text-sm tablet:leading-6"
                 />
               </div>
             </div>
@@ -50,7 +65,7 @@ export default function Profile() {
                   name="street-address"
                   id="street-address"
                   autoComplete="street-address"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 tablet:text-sm tablet:leading-6"
                 />
               </div>
             </div>

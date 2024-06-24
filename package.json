@@ -57,6 +57,7 @@
     "@typescript-eslint/parser": "^4.32.0",
     "autoprefixer": "^10.4.7",
     "babel-eslint": "^10.1.0",
+    "check-dependencies": "^2.0.0",
     "eslint": "^7.32.0",
     "eslint-config-algolia": "^19.0.2",
     "eslint-config-next": "^12.2.0",

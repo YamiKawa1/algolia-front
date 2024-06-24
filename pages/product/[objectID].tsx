@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {addItem} from '@/app/cartSlice'
 import { AppLayout } from '@/layouts/app-layout'
-
+import { ProviderLayout } from '@/layouts/provider-layout'
 export type ProductPageProps = SearchPageLayoutProps & {
   objectID: string
 }
@@ -24,7 +24,6 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
     const cart = useSelector((state) => state.cart.items)
     const dispatch = useDispatch()
 
-
     const handleAddToCart = () => {
       dispatch(addItem({
         id: product.id, 
@@ -32,9 +31,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
         name:product.name, 
         quantity: quantity, 
         price: product.price
-      }))
-      console.log(cart);
-      
+      }))      
     }
 
     const handleQuantity = (e:any, max:number) => {
@@ -65,50 +62,50 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
     }, []);
 
     return (
-    <SearchPageLayout {...props}>
-      <AppLayout>
-      <Container>
-        <div className="py-8">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col laptop:flex-row -mx-4">
-                  <div className="laptop:flex-1 px-4">
-                      <div className="flex justify-center h-[460px] rounded-lg mb-4">
-                          <img className="w-92 h-full object-cover" src={product.imgUrl} alt="Product Image" />
-                      </div>
-                      <div className="flex -mx-2 mb-4">
-                          <div className="w-1/2 px-2">
-                              <button onClick={() => {handleAddToCart()}} className="w-full bg-indigo-600 hover:bg-indigo-700900 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
-                          </div>
-                          <div className="w-1/2 px-2">
-                              <input type='number' onChange={(e) => {handleQuantity(e, product.availableQuantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />
-                          </div>
-                      </div>
-                  </div>
-                  <div className="laptop:flex-1 px-4">
-                      <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
-                      <div className="mb-2">
-                          <div className="mr-4">
-                            <h1>
-                            ${product.price}
-                            </h1>
-                          </div>
-                      </div>
-                      <div className='mb-10'>
-                              <h5 className="font-bold ">Quedan: {product.availableQuantity}</h5>
-                      </div>
-                      <div className='mt-2'> 
-                          <span className="font-bold">Descripcion:</span>
-                          <p className="mt-2">
-                            {product.description}
-                          </p>
-                      </div>
-                  </div>
+      <ProviderLayout>
+        <SearchPageLayout {...props}>
+            <Container>
+              <div className="py-8">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col laptop:flex-row -mx-4">
+                        <div className="laptop:flex-1 px-4">
+                            <div className="flex justify-center h-[460px] rounded-lg mb-4">
+                                <img className="w-92 h-full object-cover" src={product.imgUrl} alt="Product Image" />
+                            </div>
+                            <div className="flex -mx-2 mb-4">
+                                <div className="w-1/2 px-2">
+                                    <button onClick={() => {handleAddToCart()}} className="w-full bg-indigo-600 hover:bg-indigo-700900 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
+                                </div>
+                                <div className="w-1/2 px-2">
+                                    <input type='number' onChange={(e) => {handleQuantity(e, product.availableQuantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="laptop:flex-1 px-4">
+                            <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
+                            <div className="mb-2">
+                                <div className="mr-4">
+                                  <h1>
+                                  ${product.price}
+                                  </h1>
+                                </div>
+                            </div>
+                            <div className='mb-10'>
+                                    <h5 className="font-bold ">Quedan: {product.availableQuantity}</h5>
+                            </div>
+                            <div className='mt-2'> 
+                                <span className="font-bold">Descripcion:</span>
+                                <p className="mt-2">
+                                  {product.description}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               </div>
-          </div>
-        </div>
-      </Container>
-      </AppLayout>
-    </SearchPageLayout>
+            </Container>
+        </SearchPageLayout>
+      </ProviderLayout>
   )
 }
 
