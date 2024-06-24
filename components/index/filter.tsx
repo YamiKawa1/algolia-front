@@ -29,7 +29,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-//TODO category handler
 
 export type FilterProps = React.ReactNode
 
@@ -93,18 +92,18 @@ export function Filter({setCategory, setOrder, setCategoryName}: any) {
                     <h3 className="sr-only">Categories</h3>
                     <ul role="list" className="px-2 py-3 font-medium text-gray-900">
                     </ul>
-                    <div key={1000} className="px-4 py-6">
+                    <div key={1000} className="px-4 py-6 border-b">
                         <h5 className="-mx-2 -my-3 flow-root">
                           <button onClick={() => {
                             setCategory('') 
                             setCategoryName('Todo lo que necesitas')
                             }}>                          
-                            <span className="font-medium text-gray-900">Todo</span>
+                            <span className="font-medium text-gray-900 ">Todo</span>
                           </button>
                         </h5>
                     </div>
-                    {categories.map((section) => (
-                      <div key={section!.id} className="px-4 py-6">
+                    {categories && categories.map((section) => (
+                      <div key={section!.id} className="px-4 py-6 border-b">
                         <h5 className="-mx-2 -my-3 flow-root">
                           <button onClick={() => {
                             setCategory(section!.id) 
