@@ -7,6 +7,9 @@ import {
   SearchPageLayout,
 } from '@/layouts/search-page-layout'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {addItem} from '@/app/cartSlice'
+import { AppLayout } from '@/layouts/app-layout'
 
 export type ProductPageProps = SearchPageLayoutProps & {
   objectID: string
@@ -17,10 +20,21 @@ const BACKEND_URL = 'http://localhost:3333'
 export default function Product({ objectID, ...props }: ProductPageProps) {
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)
+    
+    const cart = useSelector((state) => state.cart.items)
+    const dispatch = useDispatch()
+
 
     const handleAddToCart = () => {
-      console.log(quantity);
-    // TODO: add to cart      
+      dispatch(addItem({
+        id: product.id, 
+        imgURL:product.imgUrl, 
+        name:product.name, 
+        quantity: quantity, 
+        price: product.price
+      }))
+      console.log(cart);
+      
     }
 
     const handleQuantity = (e:any, max:number) => {
@@ -52,6 +66,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
 
     return (
     <SearchPageLayout {...props}>
+      <AppLayout>
       <Container>
         <div className="py-8">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,6 +107,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
           </div>
         </div>
       </Container>
+      </AppLayout>
     </SearchPageLayout>
   )
 }
