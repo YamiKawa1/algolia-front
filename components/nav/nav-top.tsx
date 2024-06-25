@@ -13,13 +13,25 @@ import { Tablet, Laptop } from '@/lib/media'
 import { Button } from '@ui/button/button'
 import { IconLabel } from '@ui/icon-label/icon-label'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-// useEffect(() => {
-//   const [token, setToken] = useState(localStorage.getItem('token'))
-
-// })
 
 export function NavTop({setIsOpen}:any) {
+  const [token, setToken] = useState()
+  const router = useRouter()
+  console.log('token',token);
+  
+  const Logout = () => {
+    localStorage.removeItem('token')
+    setToken(null)
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem('token') != null) {
+      setToken(localStorage.getItem('token'))
+    }
+  }, [token, router])
+  
   return (
     <div className="flex flex-col px-4 py-2 laptop:mx-20 laptop:px-0 laptop:pb-0 laptop:mb-5">
       <div className="flex justify-between w-full gap-3">
@@ -53,7 +65,7 @@ export function NavTop({setIsOpen}:any) {
             </a>
             </Tablet>
             {/* TODO if user connected */}
-            <Link href="/profile">
+            {token &&<Link href="/profile">
               <Button title="Perfil">
                 <Tablet>
                   <IconLabel icon={PersonIcon} label="Perfil" />
@@ -62,8 +74,8 @@ export function NavTop({setIsOpen}:any) {
                   <IconLabel icon={PersonIcon} />
                 </Laptop>
               </Button>
-            </Link>
-            <Link href="/auth/sign-up">
+            </Link>}
+            {!token && <Link href="/auth/sign-up">
               <Button title="Registrar">
                 <Tablet>
                   <IconLabel icon={RegisterIcon} label="Registrar" />
@@ -72,8 +84,8 @@ export function NavTop({setIsOpen}:any) {
                   <IconLabel icon={RegisterIcon} />
                 </Laptop>
               </Button>
-            </Link>
-            <Link href="/auth/sign-in">
+            </Link>}
+            {!token && <Link href="/auth/sign-in">
               <Button title="Entrar">
                 <Tablet>
                   <IconLabel icon={LoginIcon} label="Entrar" />
@@ -82,15 +94,17 @@ export function NavTop({setIsOpen}:any) {
                   <IconLabel icon={LoginIcon} />
                 </Laptop>
               </Button>
-            </Link>
-            <Button title="Salir">
-              <Tablet>
-                <IconLabel icon={LogoutIcon} label="Salir" />
-              </Tablet>
-              <Laptop>
-                <IconLabel icon={LogoutIcon} />
-              </Laptop>
-            </Button>
+            </Link>}
+            {token && <Link href="/">
+                <Button title="Salir" onClick={() => {Logout()}}>
+                <Tablet>
+                  <IconLabel icon={LogoutIcon} label="Salir" />
+                </Tablet>
+                <Laptop>
+                  <IconLabel icon={LogoutIcon} />
+                </Laptop>
+              </Button>
+            </Link>}
 
 
             <Button title="Cart" onClick={()=> {setIsOpen(true)}}> 
