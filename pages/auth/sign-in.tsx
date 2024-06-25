@@ -41,9 +41,7 @@ export default function Example() {
     
   }
 
-  useEffect(()=> {
-    console.log(localStorage.getItem('token'));
-    
+  useEffect(()=> {    
     if (localStorage.getItem('token')){
       router.push('/')
     }
