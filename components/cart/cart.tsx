@@ -16,7 +16,6 @@ export default function Cart({isOpen, setIsOpen}:any) {
   const cart = useSelector((state) => state.cart.items)
   const dispatch = useDispatch()
   console.log('cart', cart);
-
   const handleQuantity = (id, quantity) => {
     dispatch(updateQuantity({id: id, quantity:quantity}))
   }
@@ -127,7 +126,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                       <div className="mt-6">
                         <a
                           href="/checkout"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-orange-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400"
                         >
                           Checkout
                         </a>

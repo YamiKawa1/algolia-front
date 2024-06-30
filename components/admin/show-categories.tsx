@@ -35,8 +35,8 @@ export function ShowCategories() {
                       <SearchBar />
                       </div>
                       <div className="relative w-full px-4 max-w-full flex-grow flex-1 py-7">
-                        <button className=" rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-indigo-600 hover:bg-indigo-700 text-sm px-4 py-2" type="button">Ver todo</button>
-                        <button className=" rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-indigo-600 hover:bg-indigo-700 text-sm px-4 py-2 mr-24" type="button">Crear categoria</button>
+                        <button className=" rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-orange-500 hover:bg-orange-400 text-sm px-4 py-2" type="button">Ver todo</button>
+                        <button className=" rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-orange-500 hover:bg-orange-400 text-sm px-4 py-2 mr-24" type="button">Crear categoria</button>
                       </div>
                     </div>
                   </div>

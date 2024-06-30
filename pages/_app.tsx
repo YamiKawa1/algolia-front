@@ -39,6 +39,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
   // )
   const[isOpen, setIsOpen] = useState(false)
   return (
+    <ProviderLayout>
       <AppLayout>
           <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
           <Head>
@@ -50,10 +51,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </Head>
           <Header setIsOpen={setIsOpen}/>
           <AnimatePresence exitBeforeEnter={true} onExitComplete={scrollToTop}>
-            <ProviderLayout>
               <Component {...pageProps} key={router.route} />
-            </ProviderLayout>
           </AnimatePresence>
       </AppLayout>
+      </ProviderLayout>
+
   )
 }

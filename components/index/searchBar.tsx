@@ -13,7 +13,7 @@ export function SearchBar() {
               </svg>
           </div>
           <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Buscar..." required />
-          <button type="submit" className="rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-indigo-600 hover:bg-indigo-700 text-sm px-4 py-2">Buscar</button>
+          <button type="submit" className="rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-orange-500 hover:bg-orange-400 text-sm px-4 py-2">Buscar</button>
       </div>
   </form>
   )

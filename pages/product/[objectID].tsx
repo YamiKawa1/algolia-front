@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {addItem} from '@/app/cartSlice'
-import { AppLayout } from '@/layouts/app-layout'
+import { useAtom } from 'jotai'
 import { ProviderLayout } from '@/layouts/provider-layout'
 export type ProductPageProps = SearchPageLayoutProps & {
   objectID: string
@@ -20,18 +20,20 @@ const BACKEND_URL = 'http://localhost:3333'
 export default function Product({ objectID, ...props }: ProductPageProps) {
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)
+
+    // const [cart, setCart] = useAtom([])
     
-    const cart = useSelector((state) => state.cart.items)
-    const dispatch = useDispatch()
+    // const cart = useSelector((state) => state.cart.items)
+    // const dispatch = useDispatch()
 
     const handleAddToCart = () => {
-      dispatch(addItem({
-        id: product.id, 
-        imgURL:product.imgUrl, 
-        name:product.name, 
-        quantity: quantity, 
-        price: product.price
-      }))      
+      // dispatch(addItem({
+      //   id: product.id, 
+      //   imgURL:product.imgUrl, 
+      //   name:product.name, 
+      //   quantity: quantity, 
+      //   price: product.price
+      // }))      
     }
 
     const handleQuantity = (e:any, max:number) => {
@@ -50,11 +52,9 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
 
     useEffect(() => {
         const getProduct = async () => {
-            console.log(objectID);
         
             var response = await fetch(`${BACKEND_URL}/products/find-product-by-id/${objectID}`)
             response = await response.json()
-            console.log(response.body);
             
             setProduct(response.body)
         }
@@ -74,7 +74,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
                             </div>
                             <div className="flex -mx-2 mb-4">
                                 <div className="w-1/2 px-2">
-                                    <button onClick={() => {handleAddToCart()}} className="w-full bg-indigo-600 hover:bg-indigo-700900 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
+                                    <button onClick={() => {handleAddToCart()}} className="w-full bg-orange-500 hover:bg-orange-400 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
                                 </div>
                                 <div className="w-1/2 px-2">
                                     <input type='number' onChange={(e) => {handleQuantity(e, product.availableQuantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />
