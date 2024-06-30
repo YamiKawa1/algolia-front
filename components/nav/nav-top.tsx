@@ -1,13 +1,11 @@
 import LogoutIcon from '@material-design-icons/svg/outlined/logout.svg'
-import RegisterIcon from '@material-design-icons/svg/outlined/app_registration.svg'
+import ViewListIcon from '@material-design-icons/svg/outlined/view_list.svg'
 import PersonIcon from '@material-design-icons/svg/outlined/person.svg'
 import PinDropIcon from '@material-design-icons/svg/outlined/pin_drop.svg'
 import LoginIcon from '@material-design-icons/svg/outlined/login.svg'
 import ShoppingCartIcon from '@material-design-icons/svg/outlined/shopping_cart.svg'
 
-import { memo, useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { setActive } from '@/app/cartSlice';
+import { useState, useEffect } from 'react'
 
 import { Tablet, Laptop } from '@/lib/media'
 import { Button } from '@ui/button/button'
@@ -19,7 +17,6 @@ import { useRouter } from 'next/router'
 export function NavTop({setIsOpen}:any) {
   const [token, setToken] = useState()
   const router = useRouter()
-  console.log('token',token);
   
   const Logout = () => {
     localStorage.removeItem('token')
@@ -36,10 +33,9 @@ export function NavTop({setIsOpen}:any) {
     <div className="flex flex-col px-4 py-2 laptop:mx-20 laptop:px-0 laptop:pb-0 laptop:mb-5">
       <div className="flex justify-between w-full gap-3">
         <div className="flex items-center">
-          {/* TODO <Logo /> */}
           <Link href="/">
             <Button title="Home">
-              <img src="/static/images/socials/logo.png" alt="" width="80" />
+              <img src="/static/images/socials/logo.png" alt="" width="170" />
             </Button>
           </Link>
         </div>
@@ -56,11 +52,11 @@ export function NavTop({setIsOpen}:any) {
             </a>
           </div>
 
-          <div className="flex items-center gap-6 laptop:gap-3">
+          <div className="flex items-center gap-6 laptop:gap-3 text-green-700">
             <Tablet>
             <a href="https://maps.app.goo.gl/2tWy9tY6sbE5LfRU6" target="_blank" rel="noopener noreferrer">
-            <Button title="Stores">
-              <IconLabel icon={PinDropIcon} label="Stores" />
+            <Button title="Tienda">
+              <IconLabel icon={PinDropIcon} label="Tienda" />
             </Button>
             </a>
             </Tablet>
@@ -75,13 +71,13 @@ export function NavTop({setIsOpen}:any) {
                 </Laptop>
               </Button>
             </Link>}
-            {!token && <Link href="/auth/sign-up">
-              <Button title="Registrar">
+            {token &&<Link href="/pedidos">
+              <Button title="Pedidos">
                 <Tablet>
-                  <IconLabel icon={RegisterIcon} label="Registrar" />
+                  <IconLabel icon={ViewListIcon} label="Pedidos" />
                 </Tablet>
                 <Laptop>
-                  <IconLabel icon={RegisterIcon} />
+                  <IconLabel icon={ViewListIcon} />
                 </Laptop>
               </Button>
             </Link>}
@@ -107,9 +103,9 @@ export function NavTop({setIsOpen}:any) {
             </Link>}
 
 
-            <Button title="Cart" onClick={()=> {setIsOpen(true)}}> 
+            <Button title="Carrito" onClick={()=> {setIsOpen(true)}}> 
               <Tablet>
-                <IconLabel icon={ShoppingCartIcon} label="Cart" />
+                <IconLabel icon={ShoppingCartIcon} label="Carrito" />
               </Tablet>
               <Laptop>
                 <IconLabel icon={ShoppingCartIcon} />

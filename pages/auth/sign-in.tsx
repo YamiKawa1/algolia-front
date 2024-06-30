@@ -29,7 +29,6 @@ export default function Example() {
         alert('hubo un error inesperado')
       } else{
         response = await response.json()
-        console.log('hola',response);
         
         localStorage.setItem('token', response.body)
         router.push('/')
@@ -51,13 +50,11 @@ export default function Example() {
       <>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mx-10 px-10">
           <div className="laptop:mx-auto laptop:w-full laptop:max-w-sm">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+            <div className="flex justify-center">
+                <img src="/static/images/socials/logo.png" alt="" width="170" />
+            </div>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Entrar en tu cuenta
+              Entra en tu cuenta
             </h2>
           </div>
   
@@ -65,7 +62,7 @@ export default function Example() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Email
+                  Correo electrónico
                 </label>
                 <div className="mt-2">
                   <input
@@ -84,8 +81,8 @@ export default function Example() {
                     Contraseña
                   </label>
                   <div className="text-sm">
-                    <a href="/auth/recover-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                      Olvido su contraseña?
+                    <a href="/auth/recover-password" className="font-semibold text-green-700 hover:text-green-600">
+                    ¿Olvidó su contraseña?
                     </a>
                   </div>
                 </div>
@@ -104,10 +101,15 @@ export default function Example() {
                 <button
                   type="submit"
                   onClick={() => {handleSignIn()}}
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Entrar
                 </button>
+              </div>
+              <div className="text-sm">
+                  <a href="/auth/sign-up" className="font-semibold text-green-700 hover:text-green-600">
+                    ¿No tienes cuenta? ¡Creala aquí!
+                  </a>
               </div>
             </div>
   

@@ -44,7 +44,6 @@ export default function Example() {
 
       if (response.ok) {
         response = await response.json()
-        console.log(response);
         localStorage.setItem('token', response.body)
         router.push('/')
       }
@@ -63,11 +62,9 @@ export default function Example() {
       <>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mx-10 px-10">
           <div className="tablet:mx-auto tablet:w-full tablet:max-w-sm">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+          <div className="flex justify-center">
+                <img src="/static/images/socials/logo.png" alt="" width="170" />
+            </div>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Crea tu cuenta
             </h2>
@@ -77,7 +74,7 @@ export default function Example() {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Email
+                  Correo electrónico
                 </label>
                 <div className="mt-2">
                   <input
@@ -92,7 +89,7 @@ export default function Example() {
 
               <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Nombre
+                  Nombre y Apellido
                 </label>
                 <div className="mt-2">
                   <input
@@ -106,7 +103,7 @@ export default function Example() {
 
               <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Telefono
+                  Teléfono
                 </label>
                 <div className="mt-2">
                   <input
@@ -155,11 +152,17 @@ export default function Example() {
                 <button
                   type="submit"
                   onClick={() => {handleSignUp()}}
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                 >
                   Crear
                 </button>
               </div>
+              <div className="text-sm">
+                  <a href="/auth/sign-in" className="font-semibold text-green-700 hover:text-green-600">
+                  ¿Ya tienes cuenta? ¡Entra aquí!
+                  </a>
+              </div>
+              
             </div>
   
           </div>
