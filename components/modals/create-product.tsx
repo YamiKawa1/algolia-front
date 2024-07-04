@@ -1,7 +1,8 @@
-import { Fragment, useState } from 'react'
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+const BACKEND_URL = 'http://localhost:3333'
 
 interface props {
   color: String,
@@ -10,9 +11,87 @@ interface props {
   symbol: String,
 }
 
-export function CreateProduct(props: props) {
-  const [open, setOpen] = useState(true)
+export function CreateProduct({open, setOpen, action, setAction}) {
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [categoryID, setCategoryID] = useState('')
+  const [quantity, setQuantity] = useState('')
+  const [price, setPrice] = useState('')
+  const [imgURL, setImgURL] = useState('')
+  const [categories, setCategories] = useState([])
+  const [token, setToken] = useState('')
+  const router = useRouter()
 
+  const handleCreateProduct = async() => {
+    try {
+        const send_data = {
+            name,
+            description,
+            category_id: categoryID,
+            available_quantity: quantity,
+            price,
+            imgURL
+        }
+        var url =  `${BACKEND_URL}/products/create `            
+        var response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify(send_data)
+          })              
+          if (!response.ok){
+            response = await response.json()
+            alert(response.message)
+          } else{
+            alert('Producto creada correctamente')
+            setAction(!action)
+          }
+    setName('')
+    setDescription('')
+    setCategoryID('')
+    setQuantity('')
+    setPrice('')
+    setImgURL('')
+
+    } catch (error) {
+        alert(error)
+    }
+    setOpen(false)
+}
+
+useEffect(() => {
+    const token_storage = localStorage.getItem('token')
+    if (!token_storage) {
+        router.push('/')
+    } else {
+        setToken(token_storage)
+    }
+  const getCategories = async() => {
+    try {
+      var url =  `${BACKEND_URL}/categories`            
+      var response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          }
+        })              
+        if (!response.ok){
+          response = await response.json()
+          alert(response.message)
+        } else{
+          response = await response.json()          
+          setCategories(response.body)
+        }
+    } catch (error) {
+        alert(error)
+    }
+  }
+  getCategories()
+}, [])
   return (
     <Transition show={open}>
       <Dialog className="z-header" onClose={setOpen}>
@@ -42,34 +121,44 @@ export function CreateProduct(props: props) {
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <DialogTitle as="h3" className="text-base mb-4 font-semibold leading-6 text-gray-900">
-                        Create Product
+                        Crear producto
                       </DialogTitle>
-                        <form className="">
                           <div className="mb-5">
                             <label className="flex mb-2 text-sm font-medium self-start">Nombre</label>
-                            <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="text" required onChange={(e) => {setName(e.target.value)}} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                          </div>
+                          <div className='mb-5'>
+                            <select required onClick={(e) => {setCategoryID(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value=''>selecciona una categoria</option>
+                              {categories && categories.map((category) => {
+                                return(
+                                  <option value={category.id}>{category.name}</option>
+                                )
+                              })
+                              }
+                            </select>
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-sm font-medium self-start">Descripcion</label>
-                            <input type="text" id="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="text" onChange={(e) => {setDescription(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-smw font-medium">URL de imagen</label>
-                            <input type="url" id="imgURL" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="url" required onChange={(e) => {setImgURL(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-smw font-medium">Cantidad</label>
-                            <input type="number" id="quantity" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="number" required onChange={(e) => {setQuantity(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-smw font-medium">Precio ($)</label>
-                            <input type="number" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="number" required onChange={(e) => {setPrice(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
 
                           <button
                             type="button"
                             className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                            onClick={() => setOpen(false)}
+                            onClick={() => {handleCreateProduct()}}
                           >
                             Confirm
                           </button>
@@ -81,7 +170,6 @@ export function CreateProduct(props: props) {
                         >
                           Cancel
                         </button>
-                      </form>                      
                     </div>
                   </div>
                 </div>
