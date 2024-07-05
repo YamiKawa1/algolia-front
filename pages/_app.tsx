@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useState } from 'react'
-
 /// #if DEV
 // eslint-disable-next-line import/order
 /// #endif

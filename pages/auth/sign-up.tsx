@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
+import Link from 'next/link'
 
 const BACKEND_URL = 'http://localhost:3333'
 
@@ -158,9 +159,12 @@ export default function Example() {
                 </button>
               </div>
               <div className="text-sm">
-                  <a href="/auth/sign-in" className="font-semibold text-green-700 hover:text-green-600">
-                  ¿Ya tienes cuenta? Entra aquí
+                <Link href="/auth/sign-in">
+                  <a className="font-semibold text-green-700 hover:text-green-600">
+                    ¿Ya tienes cuenta? Entra aquí
                   </a>
+                </Link>
+
               </div>
               
             </div>

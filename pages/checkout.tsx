@@ -1,12 +1,16 @@
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { useAtom } from 'jotai'
+import { CartProducts } from '@/app/atomsInitial'
 
 export default function Example() {
+  const [cart, setCart] = useAtom(CartProducts)
+
   return (
     <form>
       <div className="space-y-12 px-10 mx-10 pt-10">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-            <p className="text-xl font-medium">Payment Details</p>
+            <p className="text-xl font-medium">Detalles de pago</p>
             <p className="text-gray-400">Complete your order by providing your payment details.</p>
             <div className="">
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const BACKEND_URL = 'http://localhost:3333'
 
@@ -81,9 +82,11 @@ export default function Example() {
                     Contraseña
                   </label>
                   <div className="text-sm">
-                    <a href="/auth/recover-password" className="font-semibold text-green-700 hover:text-green-600">
-                    ¿Olvidaste tu contraseña?
-                    </a>
+                    <Link href="/auth/recover-password">
+                      <a className="font-semibold text-green-700 hover:text-green-600">
+                        ¿Olvidaste tu contraseña?
+                      </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="mt-2">
@@ -107,12 +110,13 @@ export default function Example() {
                 </button>
               </div>
               <div className="text-sm">
+                <Link href="/auth/sign-up">
                   <a href="/auth/sign-up" className="font-semibold text-green-700 hover:text-green-600">
                     ¿No tienes cuenta? Regístrate aquí
                   </a>
+                </Link>
               </div>
             </div>
-  
           </div>
         </div>
       </>

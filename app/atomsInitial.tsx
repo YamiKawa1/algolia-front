@@ -1,6 +1,3 @@
 import { atom  } from "jotai";
 
-const CartProducts = atom([]);
-
-
-export {CartProducts}
+export const CartProducts = atom([]);

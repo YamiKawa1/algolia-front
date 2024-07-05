@@ -61,7 +61,7 @@ export function NavTop({setIsOpen}:any) {
             </a>
             </Tablet>
             {/* TODO if user connected */}
-            {token &&<Link href="/profile">
+            {token && <Link href="/profile">
               <Button title="Perfil">
                 <Tablet>
                   <IconLabel icon={PersonIcon} label="Perfil" />
