@@ -1,8 +1,10 @@
 import { Fragment, useState } from 'react'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { Dialog, Transition, TransitionChild, DialogPanel, DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import {removeItem, updateQuantity} from '@/app/cartSlice'
+import { CartProducts } from '@/app/atomsInitial'
 
 interface Iproduct{
   id: number,
@@ -15,7 +17,6 @@ interface Iproduct{
 export default function Cart({isOpen, setIsOpen}:any) {
   const cart = useSelector((state) => state.cart.items)
   const dispatch = useDispatch()
-  console.log('cart', cart);
   const handleQuantity = (id, quantity) => {
     dispatch(updateQuantity({id: id, quantity:quantity}))
   }
@@ -56,7 +57,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <DialogTitle className="text-lg font-medium text-gray-900">Shopping cart</DialogTitle>
+                        <DialogTitle className="text-lg font-medium text-gray-900">Carrito de compra</DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -64,7 +65,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                             onClick={() => setIsOpen(false)}
                           >
                             <span className="absolute -inset-0.5" />
-                            <span className="sr-only">Close panel</span>
+                            <span className="sr-only">Cerrar panel</span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                           </button>
                         </div>
@@ -104,7 +105,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                                       <button
                                         type="button"
                                         onClick={() => {handleRemoveItem(product.id)}}
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="font-medium text-green-700 hover:text-green-600"
                                       >
                                         Remove
                                       </button>
@@ -132,17 +133,6 @@ export default function Cart({isOpen, setIsOpen}:any) {
                         </a>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                        <p>
-                          or{' '}
-                          <button
-                            type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
-                          >
-                            Continue Shopping
-                            <span aria-hidden="true"> &rarr;</span>
-                          </button>
-                        </p>
                       </div>
                     </div>
                   </div>

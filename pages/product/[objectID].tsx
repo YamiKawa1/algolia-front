@@ -70,14 +70,14 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
                     <div className="flex flex-col laptop:flex-row -mx-4">
                         <div className="laptop:flex-1 px-4">
                             <div className="flex justify-center h-[460px] rounded-lg mb-4">
-                                <img className="w-92 h-full object-cover" src={product.imgUrl} alt="Product Image" />
+                                <img className="w-92 h-full object-cover" src={product.img_url} alt="Product Image" />
                             </div>
                             <div className="flex -mx-2 mb-4">
                                 <div className="w-1/2 px-2">
                                     <button onClick={() => {handleAddToCart()}} className="w-full bg-orange-500 hover:bg-orange-400 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
                                 </div>
                                 <div className="w-1/2 px-2">
-                                    <input type='number' onChange={(e) => {handleQuantity(e, product.availableQuantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />
+                                    <input type='number' onChange={(e) => {handleQuantity(e, product.available_quantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
                                 </div>
                             </div>
                             <div className='mb-10'>
-                                    <h5 className="font-bold ">Quedan: {product.availableQuantity}</h5>
+                                    <h5 className="font-bold ">Quedan: {product.available_quantity}</h5>
                             </div>
                             <div className='mt-2'> 
                                 <span className="font-bold">Descripcion:</span>

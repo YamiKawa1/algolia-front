@@ -97,9 +97,7 @@ export default function Profile() {
           }
         })
         if (!response.ok) {
-          const data = await response.json()
-          console.log(data);
-          
+          const data = await response.json()          
           alert(data.message)
         } else {
           const data = await response.json()
