@@ -45,7 +45,6 @@ export function ShowCategories() {
       } catch (error) {
         alert(error)
       }
-
     } 
   }
 
