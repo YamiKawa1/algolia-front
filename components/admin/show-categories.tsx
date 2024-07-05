@@ -19,7 +19,7 @@ export function ShowCategories() {
   const router = useRouter()
 
   const handleDeleteCategory = async(id) => {
-    const answer = window.confirm('¿Seguro que quieres borrar la categoria?')
+    const answer = window.confirm('¿Seguro que quieres borrar la categoría?')
     if(answer) {
       try {
         const send_data = {
@@ -40,7 +40,7 @@ export function ShowCategories() {
             alert(response.message)
           }  else{
             setAction(!action)
-            alert('Categoria eliminada correctamente')
+            alert('categoría eliminada correctamente')
           }
       } catch (error) {
         alert(error)
@@ -108,14 +108,14 @@ export function ShowCategories() {
                   <div className="rounded-t mb-0 px-4 py-3 border-0">
                     <div className="flex flex-wrap items-center">
                       <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                        <h4 className="font-semibold text-base text-blueGray-700">Categorias</h4>
+                        <h4 className="font-semibold text-base text-blueGray-700">categorías</h4>
                       </div>
                       <div className='w-80 mr-3'>
                       <SearchBar setSearch={setSearch}/>
                       </div>
                       <div className="relative w-full px-4 max-w-full flex-grow flex-1 py-7">
                         <button onClick={() => {setSearch('')}} className=" rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-orange-500 hover:bg-orange-400 text-sm px-4 py-2" type="button">Ver todo</button>
-                        <button onClick={() => {setCategoryOpen(true)}} className=" rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-orange-500 hover:bg-orange-400 text-sm px-4 py-2 mr-24" type="button">Crear categoria</button>
+                        <button onClick={() => {setCategoryOpen(true)}} className=" rounded-md border border-transparent text-base font-medium text-white shadow-sm absolute end-1 bottom-2 bg-orange-500 hover:bg-orange-400 text-sm px-4 py-2 mr-24" type="button">Crear categoría</button>
                       </div>
                     </div>
                   </div>

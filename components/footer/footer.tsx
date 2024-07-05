@@ -13,30 +13,13 @@ export const Footer = memo(function Footer() {
               <ul className="small-regular flex flex-col gap-2">
                 <li>
                 <p className='font-bold text-sm'>
-                  Telefono: 04128549665
+                  Teléfono: 04128549665
                   </p>
-
-                  {/* <Link
-                    href={`/footer-link-${1 + 1}-${2 + 1}`}
-                    title={`Numero de telefono:`}
-                    className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                                        Numero de telefono:
-                  </Link> */}
                 </li>
                 <li>
                   <p className='font-bold text-sm'>
                   Correo: farmaciabarreto@gmail.com
                   </p>
-                  {/* <Link
-                    href={`/footer-link-${1 + 1}-${2 + 1}`}
-                    title={`Link ${1 + 1}`}
-                    className="text-neutral-darkest can-hover:transition-colors can-hover:hover:text-neutral-dark"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Correo:
-                  </Link> */}
                 </li>
               </ul>
           </div>

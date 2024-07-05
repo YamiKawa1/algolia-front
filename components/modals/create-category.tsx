@@ -36,7 +36,7 @@ export function CreateCategory({open, setOpen, action, setAction}) {
                 response = await response.json()
                 alert(response.message)
               } else{
-                alert('Categoria creada correctamente')
+                alert('categoría creada correctamente')
                 setAction(!action)
               }
         } catch (error) {
@@ -83,7 +83,7 @@ export function CreateCategory({open, setOpen, action, setAction}) {
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <DialogTitle as="h3" className="text-base mb-4 font-semibold leading-6 text-gray-900">
-                        Crear Categoria
+                        Crear categoría
                       </DialogTitle>
                         <form className="">
                           <div className="mb-5">

@@ -128,7 +128,7 @@ useEffect(() => {
                           </div>
                           <div className='mb-5'>
                             <select defaultValue={[product.category_id]} required onClick={(e) => {setCategoryID(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option value=''>selecciona una categoria</option>
+                            <option value=''>selecciona una categoría</option>
                               {categories && categories.map((category) => {
                                 return(
                                   <option value={category.id}>{category.name}</option>
