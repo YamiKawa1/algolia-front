@@ -18,7 +18,6 @@ const BACKEND_URL = 'http://localhost:3333'
 
 export default function Product({ objectID, ...props }: ProductPageProps) {
   const [cart, setCart] = useAtom(CartProducts)
-  console.log('product', cart);
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)
     
@@ -63,7 +62,6 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
         
             var response = await fetch(`${BACKEND_URL}/products/find-product-by-id/${objectID}`)
             response = await response.json()
-            console.log(response);
             
             setProduct(response.body)
         }
