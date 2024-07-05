@@ -4,13 +4,11 @@ export default function Example() {
       <>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 mx-10 px-10">
           <div className="tablet:mx-auto tablet:w-full tablet:max-w-sm">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+          <div className="flex justify-center">
+                <img src="/static/images/socials/logo.png" alt="" width="170" />
+            </div>            
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Coloca el email para enviar el link de recuperacion
+              Coloca el email para enviar el link de recuperación
             </h2>
           </div>
   
@@ -18,7 +16,7 @@ export default function Example() {
             <form className="space-y-6" action="#" method="POST">
               <div className="flex flex-col">
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
+                  Ingresa tu correo electrónico
                 </label>
                 <div className="mt-2">
                   <input
@@ -37,7 +35,7 @@ export default function Example() {
                   type="submit"
                   className="flex w-full tablet:w-96 justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Enviar
+                  Recuperar cotraseña
                 </button>
               </div>
             </form>

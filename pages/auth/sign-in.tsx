@@ -82,7 +82,7 @@ export default function Example() {
                   </label>
                   <div className="text-sm">
                     <a href="/auth/recover-password" className="font-semibold text-green-700 hover:text-green-600">
-                    ¿Olvidó su contraseña?
+                    ¿Olvidaste tu contraseña?
                     </a>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ export default function Example() {
               </div>
               <div className="text-sm">
                   <a href="/auth/sign-up" className="font-semibold text-green-700 hover:text-green-600">
-                    ¿No tienes cuenta? ¡Creala aquí!
+                    ¿No tienes cuenta? Regístrate aquí
                   </a>
               </div>
             </div>

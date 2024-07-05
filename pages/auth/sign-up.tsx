@@ -159,7 +159,7 @@ export default function Example() {
               </div>
               <div className="text-sm">
                   <a href="/auth/sign-in" className="font-semibold text-green-700 hover:text-green-600">
-                  ¿Ya tienes cuenta? ¡Entra aquí!
+                  ¿Ya tienes cuenta? Entra aquí
                   </a>
               </div>
               
