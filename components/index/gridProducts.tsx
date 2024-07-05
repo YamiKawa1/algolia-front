@@ -26,6 +26,7 @@ export const GridProducts = memo(function GridProducts({
     animation = true,
     order,
     category,
+    search
 }) {
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)
@@ -38,27 +39,42 @@ export const GridProducts = memo(function GridProducts({
         const fetchData = async () => {
             try {
                 var url;
-                if(order && category) {
-                    url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}?priceSort=${order}&category=${category}`
-                } else {
-                    if(order){
-                        url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}?priceSort=${order}`
+                if (search) {
+                    url =`${BACKEND_URL}/products/find-product-by-name/${search}`
+                    var response = await fetch(url);
+                
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                    if(category) {
-                        url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}?category=${category}`
-                    }
-                }
-                if(!order && !category) {
-                    url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}`
-                }
-                var response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                response = await response.json();
+                    response = await response.json();
+    
 
-                setPageNumber(response.body!.meta.lastPage)             
-                setProducts(response.body!.data);
+                    setPageNumber(1)       
+                    setProducts(response.body);
+                } else { 
+                    if(order && category) {
+                        url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}?priceSort=${order}&category=${category}`
+                    } else {
+                        if(order){
+                            url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}?priceSort=${order}`
+                        }
+                        if(category) {
+                            url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}?category=${category}`
+                        }
+                    }
+                    if(!order && !category) {
+                        url =`${BACKEND_URL}/products/order-products/${page}/${PRODUCTS_PER_PAGE}`
+                    }    
+                    var response = await fetch(url);
+                
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    response = await response.json();
+    
+                    setPageNumber(response.body!.meta.lastPage)       
+                    setProducts(response.body!.data);
+                }
             } catch (e) {
                 setError(e.message);
             }
@@ -67,13 +83,8 @@ export const GridProducts = memo(function GridProducts({
 
         if (!productsPerPage) setProductsPerPage(products.length)
             
-      }, [page, order, category])
+      }, [page, order, category, search])
     
-    const handlePage = (page: number) => {
-        setPage(page)
-        return true
-    }
-
     return (
         <section className="w-full ">
             <m.ol
@@ -83,7 +94,7 @@ export const GridProducts = memo(function GridProducts({
             exit="hidden"
             >
             <AnimatePresence>
-                {products.map((product, i) => (
+                {products && products.map((product, i) => (
                                 <m.li
                                 key={product.id}
                                 layout={shouldReduceMotion || !animation ? false : 'position'}
