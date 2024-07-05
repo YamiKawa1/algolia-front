@@ -27,6 +27,8 @@ export default function Index(props: SearchPageLayoutProps) {
   const [categoryName, setCategoryName] = useState('')
   const [category, setCategory] = useState('')
   const [order, setOrder] = useState('')
+  const [search, setSearch] = useState('')
+
   return (
     <SearchPageLayout {...props}>
         <Banner 
@@ -43,6 +45,7 @@ export default function Index(props: SearchPageLayoutProps) {
           setCategory={setCategory} 
           setOrder={setOrder}
           setCategoryName={setCategoryName}
+          setSearch={setSearch}
           />
           
           <div className="flex-grow flex flex-col gap-2 laptop:gap-5">
@@ -50,6 +53,7 @@ export default function Index(props: SearchPageLayoutProps) {
             <GridProducts 
             category={category} setCategory={setCategory} 
             order={order} setOrder={setOrder}
+            search={search} setSearch={setSearch}
             />
           </div>
         </div>

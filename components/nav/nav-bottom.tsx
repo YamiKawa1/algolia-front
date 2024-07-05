@@ -16,7 +16,7 @@ export function NavBottom() {
           <nav>
             <ul className="flex gap-20 small-uppercase">
               <NavItem label="Productos" href={`/admin/products`} />
-              <NavItem label="Pagos" href={`/admin/payments`} />
+              <NavItem label="Pedidos" href={`/admin/payments`} />
             </ul>
           </nav>
     </div>

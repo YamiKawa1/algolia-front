@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Container } from '@/components/container/container'
-import { SearchBar } from '@/components/index/searchBar';
-import {TrashIcon, ArrowPathIcon, ShoppingCartIcon} from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
-
-
 
 const products =[{
   id: 854654652,
@@ -57,7 +52,7 @@ const BACKEND_URL = 'http://localhost:3333'
 export default function Profile() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [direction, setDirection] = useState('')
+  const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
@@ -68,7 +63,7 @@ export default function Profile() {
       const send_data = {
         name,
         email,
-        direction,
+        address,
         phone,
         password
       }
@@ -80,7 +75,7 @@ export default function Profile() {
           'Authorization': 'Bearer ' + token,
         },  
         body: JSON.stringify(send_data)
-      })
+      })      
     } catch (error) {
       
     }
@@ -103,12 +98,14 @@ export default function Profile() {
         })
         if (!response.ok) {
           const data = await response.json()
+          console.log(data);
+          
           alert(data.message)
         } else {
           const data = await response.json()
           setName(data.body.name)
           setEmail(data.body.email)
-          setDirection(data.body.direction)
+          setAddress(data.body.address)
           setPhone(data.body.phone)
         }
       } catch (error) {
@@ -136,13 +133,13 @@ export default function Profile() {
       <form>
         <div className="space-y-12 px-10 mx-10">
           <div className="border-b border-gray-900/10 pb-12 mt-10">
-            <h1 className="text-base font-semibold leading-7 text-gray-900">Informacion personal</h1>
-            <p className="mt-1 text-sm leading-6 text-gray-600">Usa una direccion donde puedas recibir tus compras.</p>
+            <h1 className="text-base font-semibold leading-7 text-gray-900">Información personal</h1>
+            <p className="mt-1 text-sm leading-6 text-gray-600">Usa una dirección donde puedas recibir tus compras.</p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 tablet:grid-cols-6">
               <div className="tablet:col-span-3">
                 <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                  Nombre
+                  Nombre y Apellido
                 </label>
                 <div className="mt-2">
                   <input
@@ -157,7 +154,7 @@ export default function Profile() {
 
               <div className="tablet:col-span-3">
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
+                  Correo electrónico
                 </label>
                 <div className="mt-2">
                   <input
@@ -173,7 +170,7 @@ export default function Profile() {
 
               <div className="tablet:col-span-3">
                 <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                  Telefono
+                  Teléfono
                 </label>
                 <div className="mt-2">
                   <input
@@ -200,13 +197,13 @@ export default function Profile() {
 
               <div className="col-span-full">
                 <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
-                  Direccion
+                  Dirección
                 </label>
                 <div className="mt-2">
                   <input
                     type="text"
-                    defaultValue={direction}
-                    onChange={(e) => {setDirection(e.target.value)}}
+                    defaultValue={address}
+                    onChange={(e) => {setAddress(e.target.value)}}
                     className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 tablet:text-sm tablet:leading-6"
                   />
                 </div>
@@ -224,109 +221,6 @@ export default function Profile() {
           </button>
         </div>
       </form>
-
-      <Container className="flex flex-col gap-2 laptop:mt-10 laptop:gap-10">
-          <section className="py-1 bg-blueGray-50">
-            <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
-              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                <div className="rounded-t mb-0 px-4 py-3 border-0">
-                  <div className="flex flex-wrap items-center">
-                    <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                      <h3 className="font-semibold text-base text-blueGray-700">Mis compras</h3>
-                    </div>
-                    <div className='w-80'>
-                    <SearchBar />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="block w-full overflow-x-auto h-96">
-                  <table className="items-center bg-transparent w-full border-collapse justify-items-center">
-                    <thead>
-                      <tr>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          ID
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Ver Compra
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Estatus
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          ID transferencia
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          ID usuario
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Total
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Direccion
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Creado
-                        </th>
-                        <th className="px-3 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Acciones
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {products.map((product)=> {
-                        return(
-                          <tr>
-                          <th className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                            {product.id}
-                          </th>
-                          <th className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                              <div className=''>
-                                  <button className='w-5'>
-                                  <ShoppingCartIcon />
-                                  </button>
-                              </div>
-                          </th>
-                          <td className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                            {product.status}
-                          </td>
-                          <td className="border-t-0 px-3 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {product.bill_id}
-                          </td>
-                          <td className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {product.user_id}
-                          </td>
-                          <td className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {product.total}
-                          </td>
-                          <td className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {product.address}
-                          </td>
-                          <td className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {product.created_at}
-                          </td>
-                          <td className="border-t-0 px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            <div className=''>
-                              <button className='w-5'>
-                              <TrashIcon />
-                              </button>
-                              <button className='w-5'>
-                              <ArrowPathIcon />
-                              </button>
-                            </div>
-                          </td>
-
-                        </tr>
-                        )
-                      })}
-                    </tbody>
-
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
-      </Container>
     </div>
   )
 }
