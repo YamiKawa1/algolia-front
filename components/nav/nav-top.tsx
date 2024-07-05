@@ -45,7 +45,7 @@ export function NavTop({setIsOpen}:any) {
             <a href="https://maps.app.goo.gl/2tWy9tY6sbE5LfRU6" target="_blank" rel="noopener noreferrer">
               <IconLabel
                 icon={PinDropIcon}
-                label="Find a store"
+                label="Tienda"
                 labelPosition="right"
                 classNameLabel="label-regular"
               />
@@ -71,7 +71,7 @@ export function NavTop({setIsOpen}:any) {
                 </Laptop>
               </Button>
             </Link>}
-            {token &&<Link href="/pedidos">
+            {token &&<Link href="/payments">
               <Button title="Pedidos">
                 <Tablet>
                   <IconLabel icon={ViewListIcon} label="Pedidos" />
