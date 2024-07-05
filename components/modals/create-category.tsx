@@ -12,7 +12,7 @@ interface props {
   symbol: String,
 }
 
-export function CreateCategory({open, setOpen}) {
+export function CreateCategory({open, setOpen, action, setAction}) {
     const [name, setName] = useState('')
     const [token, setToken] = useState('')
     const router = useRouter()
@@ -35,6 +35,9 @@ export function CreateCategory({open, setOpen}) {
               if (!response.ok){
                 response = await response.json()
                 alert(response.message)
+              } else{
+                alert('Categoria creada correctamente')
+                setAction(!action)
               }
         } catch (error) {
             alert(error)
@@ -90,14 +93,14 @@ export function CreateCategory({open, setOpen}) {
                           <button
                             type="button"
                             className="inline-flex w-full justify-center rounded-md bg-orange-500 hover:bg-orange-400 px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
-                            onClick={() => handleCreateCategory()}
+                            onClick={() => {handleCreateCategory}}
                           >
                             Confirm
                           </button>
                           <button
                           type="button"
                           className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                          onClick={() => setOpen(false)}
+                          onClick={() => {setOpen(false)}}
                           data-autofocus
                         >
                           Cancel

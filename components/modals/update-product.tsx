@@ -11,7 +11,7 @@ interface props {
   symbol: String,
 }
 
-export function CreateProduct({open, setOpen, action, setAction}) {
+export function UpdateProduct({product, open, setOpen, action, setAction}) {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [categoryID, setCategoryID] = useState('')
@@ -22,7 +22,7 @@ export function CreateProduct({open, setOpen, action, setAction}) {
   const [token, setToken] = useState('')
   const router = useRouter()
 
-  const handleCreateProduct = async() => {
+  const handleUpdateProduct = async() => {
     try {
         const send_data = {
             name,
@@ -32,9 +32,9 @@ export function CreateProduct({open, setOpen, action, setAction}) {
             price,
             img_url: imgURL
         }
-        var url =  `${BACKEND_URL}/products/create `            
+        var url =  `${BACKEND_URL}/products/update/${product.id} `            
         var response = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export function CreateProduct({open, setOpen, action, setAction}) {
             response = await response.json()
             alert(response.message)
           } else{
-            alert('Producto creada correctamente')
+            alert('Producto actualizado correctamente')
             setAction(!action)
           }
     setName('')
@@ -124,10 +124,10 @@ useEffect(() => {
                       </DialogTitle>
                           <div className="mb-5">
                             <label className="flex mb-2 text-sm font-medium self-start">Nombre</label>
-                            <input type="text" required onChange={(e) => {setName(e.target.value)}} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="text" defaultValue={product.name} required onChange={(e) => {setName(e.target.value)}} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
                           <div className='mb-5'>
-                            <select required onClick={(e) => {setCategoryID(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <select defaultValue={[product.category_id]} required onClick={(e) => {setCategoryID(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value=''>selecciona una categoria</option>
                               {categories && categories.map((category) => {
                                 return(
@@ -139,25 +139,25 @@ useEffect(() => {
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-sm font-medium self-start">Descripcion</label>
-                            <input type="text" onChange={(e) => {setDescription(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="text" defaultValue={product.description} onChange={(e) => {setDescription(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-smw font-medium">URL de imagen</label>
-                            <input type="url" required onChange={(e) => {setImgURL(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="url" defaultValue={product.img_url} required onChange={(e) => {setImgURL(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-smw font-medium">Cantidad</label>
-                            <input type="number" required onChange={(e) => {setQuantity(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="number" defaultValue={product.available_quantity} required onChange={(e) => {setQuantity(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
                           <div className="mb-5">
                             <label className="flex mb-2 text-smw font-medium">Precio ($)</label>
-                            <input type="number" required onChange={(e) => {setPrice(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
+                            <input type="number" defaultValue={product.price} required onChange={(e) => {setPrice(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
                           </div>
 
                           <button
                             type="button"
                             className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                            onClick={() => {handleCreateProduct()}}
+                            onClick={() => {handleUpdateProduct()}}
                           >
                             Confirm
                           </button>
