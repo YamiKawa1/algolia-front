@@ -7,10 +7,9 @@ import {
   SearchPageLayout,
 } from '@/layouts/search-page-layout'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {addItem} from '@/app/cartSlice'
 import { useAtom } from 'jotai'
 import { ProviderLayout } from '@/layouts/provider-layout'
+import { CartProducts } from '@/app/atomsInitial'
 export type ProductPageProps = SearchPageLayoutProps & {
   objectID: string
 }
@@ -18,22 +17,31 @@ export type ProductPageProps = SearchPageLayoutProps & {
 const BACKEND_URL = 'http://localhost:3333'
 
 export default function Product({ objectID, ...props }: ProductPageProps) {
+  const [cart, setCart] = useAtom(CartProducts)
+  console.log('product', cart);
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)
-
-    // const [cart, setCart] = useAtom([])
     
     // const cart = useSelector((state) => state.cart.items)
     // const dispatch = useDispatch()
 
-    const handleAddToCart = () => {
-      // dispatch(addItem({
-      //   id: product.id, 
-      //   imgURL:product.imgUrl, 
-      //   name:product.name, 
-      //   quantity: quantity, 
-      //   price: product.price
-      // }))      
+    const addToCart = () => {
+      const index_product = cart.findIndex((item) => item.id == product.id)
+      var new_cart
+      if (index_product != -1) {
+        new_cart = [...cart]
+        new_cart[index_product].quantity = quantity
+      } else {
+        const new_product = {
+          id: product.id,
+          name: product.name,
+          img_url: product.imgUrl,
+          quantity: quantity,
+          price: product.price
+        }
+        new_cart = [...cart, new_product]
+      }
+      setCart(new_cart)
     }
 
     const handleQuantity = (e:any, max:number) => {
@@ -55,6 +63,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
         
             var response = await fetch(`${BACKEND_URL}/products/find-product-by-id/${objectID}`)
             response = await response.json()
+            console.log(response);
             
             setProduct(response.body)
         }
@@ -70,14 +79,14 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
                     <div className="flex flex-col laptop:flex-row -mx-4">
                         <div className="laptop:flex-1 px-4">
                             <div className="flex justify-center h-[460px] rounded-lg mb-4">
-                                <img className="w-92 h-full object-cover" src={product.img_url} alt="Product Image" />
+                                <img className="w-92 h-full object-cover" src={product.imgUrl} alt="Product Image" />
                             </div>
                             <div className="flex -mx-2 mb-4">
                                 <div className="w-1/2 px-2">
-                                    <button onClick={() => {handleAddToCart()}} className="w-full bg-orange-500 hover:bg-orange-400 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
+                                    <button onClick={() => {addToCart(product)}} className="w-full bg-orange-500 hover:bg-orange-400 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
                                 </div>
                                 <div className="w-1/2 px-2">
-                                    <input type='number' onChange={(e) => {handleQuantity(e, product.available_quantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />
+                                    <input type='number' onChange={(e) => {handleQuantity(e, product.availableQuantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />
                                 </div>
                             </div>
                         </div>
@@ -91,7 +100,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
                                 </div>
                             </div>
                             <div className='mb-10'>
-                                    <h5 className="font-bold ">Quedan: {product.available_quantity}</h5>
+                                    <h5 className="font-bold ">Quedan: {product.availableQuantity}</h5>
                             </div>
                             <div className='mt-2'> 
                                 <span className="font-bold">Descripcion:</span>
