@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useAtom, useSetAtom } from 'jotai'
 import { Dialog, Transition, TransitionChild, DialogPanel, DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
@@ -17,20 +17,37 @@ interface Iproduct{
 
 export default function Cart({isOpen, setIsOpen}:any) {
   const [cart, setCart] = useAtom(CartProducts)
-  
-  const totalBill = (products) => {
-    var total = 0;
-    for (const product of products){
-      total += product.quantity * product.price
-    }
-    return total
+  const [total, setTotal] = useState(0)
+
+  const totalBill = () => {
+    var total_bill = 0;
+    console.log('cart', cart);
+    for (const product of cart){
+      total_bill += product.quantity * product.price
+    }  
+    setTotal(total_bill)
   }
 
-  const handleQuantity = () => {
-
+  const handleQuantity = (id, quantity) => {
+    const new_cart = [...cart]
+    console.log(id, quantity, new_cart);
+    new_cart[id].quantity = quantity
+    setCart([...new_cart])
   }
 
-  console.log('cart', cart);
+  const handleRemoveItem = (id) => {
+    console.log(id);
+    
+    var new_cart = [...cart]
+    const index = new_cart.findIndex(product => product.id == id)
+    console.log(index);
+    new_cart.splice(index, 1)
+    setCart([...new_cart])
+  }
+
+  useEffect(()=> {
+    totalBill()
+  }, [cart])
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog className="relative z-header" onClose={setIsOpen}>
@@ -79,7 +96,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {cart.length > 0 && cart.map((product:Iproduct) => (
+                            {cart.length > 0 && cart.map((product:Iproduct, i) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -104,14 +121,14 @@ export default function Cart({isOpen, setIsOpen}:any) {
                                     <input 
                                       type="number" 
                                       defaultValue={product.quantity}
-                                      onChange={(e) => {handleQuantity(product.id, e.target.value)}} 
+                                      onChange={(e) => {handleQuantity(i, e.target.value)}} 
                                       className='w-1/3 w-full text-center mx-5 border rounded-full font-bold' min={1}
                                     />
 
                                     <div className="flex w-1/3 ">
                                       <button
                                         type="button"
-                                        // onClick={() => {handleRemoveItem(product.id)}}
+                                        onClick={() => {handleRemoveItem(product.id)}}
                                         className="font-medium text-green-700 hover:text-green-600"
                                       >
                                         Remove
@@ -129,7 +146,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Total</p>
-                        <p>${totalBill(cart)}</p>
+                        <p>${total}</p>
                       </div>
                       <div className="mt-6">
                       <Link href="/checkout">
