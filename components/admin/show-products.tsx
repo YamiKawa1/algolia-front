@@ -81,8 +81,6 @@ export function ShowProducts() {
               }
             }
             response = await response.json();
-
-            console.log(response);
             setPageNumber(1)   
             setProducts(response.body)
         } else {
@@ -99,8 +97,6 @@ export function ShowProducts() {
             alert(data.message)
           } else {
             response = await response.json()
-            console.log(response);
-
             setPageNumber(response.body!.meta.lastPage)       
             setProducts(response.body!.data)
           }

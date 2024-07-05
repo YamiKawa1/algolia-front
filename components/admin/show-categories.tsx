@@ -74,9 +74,6 @@ export function ShowCategories() {
                 throw new Error('Network response was not ok');
             }
             response = await response.json();
-
-            console.log(response);
-
             setCategories(response.body)
         } else {
               url = `${BACKEND_URL}/categories`
@@ -92,9 +89,7 @@ export function ShowCategories() {
             const data = await response.json()
             alert(data.message)
           } else {
-            response = await response.json()
-            console.log(response);
-            
+            response = await response.json()            
             setCategories(response.body)
           }
         }

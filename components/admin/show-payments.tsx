@@ -150,9 +150,6 @@ const statusBottom = (status, id) => {
                 throw new Error('Network response was not ok');
             }
             response = await response.json();
-
-            console.log(response);
-
             setPayments(response.body)
         } else {
             var url;
@@ -173,9 +170,7 @@ const statusBottom = (status, id) => {
             const data = await response.json()
             alert(data.message)
           } else {
-            response = await response.json()
-            console.log(response);
-            
+            response = await response.json()            
             setPayments(response.body)
           }
         }
