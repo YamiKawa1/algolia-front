@@ -32,7 +32,7 @@ function classNames(...classes) {
 
 export type FilterProps = React.ReactNode
 
-export function Filter({setCategory, setOrder, setCategoryName}: any) {
+export function Filter({setCategory, setOrder, setCategoryName, setSearch}: any) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [categories, setCategories] = useState([])
 
@@ -96,6 +96,7 @@ export function Filter({setCategory, setOrder, setCategoryName}: any) {
                         <h5 className="-mx-2 -my-3 flow-root">
                           <button onClick={() => {
                             setCategory('') 
+                            setSearch('')
                             setCategoryName('Todo lo que necesitas')
                             }}>                          
                             <span className="font-medium text-gray-900 ">Todo</span>
@@ -126,7 +127,7 @@ export function Filter({setCategory, setOrder, setCategoryName}: any) {
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <MenuButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                    Sort
+                    Ordenar
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
@@ -175,8 +176,7 @@ export function Filter({setCategory, setOrder, setCategoryName}: any) {
               </button>
             </div>
             <div className='w-80'>
-              {/* TODO: Here goes search bar */}
-              <SearchBar />
+              <SearchBar setSearch={setSearch} />
             </div>
           </div>
 
