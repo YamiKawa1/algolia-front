@@ -1,6 +1,6 @@
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { useAtom } from 'jotai'
-import { CartProducts } from '@/app/atomsInitial'
+import { CartProducts, CartUpdate } from '@/app/atomsInitial'
 import { Fragment, useEffect, useState } from 'react'
 const BACKEND_URL = 'http://localhost:3333'
 
@@ -14,6 +14,7 @@ export default function Example() {
   const [total, setTotal] = useState(0)
 
   const [requireAddress, setRequireAddress] = useState('')
+  const [update, setUpdate] = useAtom(CartUpdate)
 
   const totalBill = () => {
     var total_bill = 0;
@@ -92,12 +93,22 @@ export default function Example() {
           setTotal(0)
           setTransferenceId('')
           setAddress('')
+          setCart([])
+          localStorage.removeItem('cart')
         }
     } catch (error) {
       alert(error)
     }
   }
   useEffect(()=> {
+    const storage_cart = JSON.parse(localStorage.getItem('cart'))
+
+    if (storage_cart != null) {
+      setCart(storage_cart)
+    } else {
+      setCart([])
+    }
+
     const token_storage = localStorage.getItem('token')
     if (token) {      
       setToken(token_storage)
@@ -152,7 +163,7 @@ export default function Example() {
     if (token) {
       getUserDirection
     }
-  }, [cart, requireAddress])
+  }, [update, requireAddress])
 
   return (
       <div className="space-y-12 px-10 mx-10 pt-10">

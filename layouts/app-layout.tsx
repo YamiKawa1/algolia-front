@@ -1,7 +1,7 @@
 import type { SearchClient } from 'algoliasearch/lite'
 import { LazyMotion } from 'framer-motion'
 import { atom, Provider as JotaiProvider } from 'jotai'
-import { useAtomValue } from 'jotai/utils'
+// import { useAtomValue } from 'jotai/utils'
 import { Context as ResponsiveContext } from 'react-responsive'
 
 import { configAtom } from '@/config/config'
@@ -26,7 +26,7 @@ const loadFramerMotionFeatures = () =>
 export const searchClientAtom = atom<SearchClient | undefined>(undefined)
 
 export function AppLayout({ children }: AppLayoutProps) {
-  const { setUserToken } = useAtomValue(configAtom)
+  // const { setUserToken } = useAtomValue(configAtom)
   const isMounted = useIsMounted(true)
 
   // Initialize search client
@@ -39,14 +39,14 @@ export function AppLayout({ children }: AppLayoutProps) {
   set(searchClientAtom, searchClient)
 
   // Initialize search insights
-  useSearchInsights({
-    appId,
-    searchApiKey,
-    setUserToken,
-  })
+  // useSearchInsights({
+  //   appId,
+  //   searchApiKey,
+  //   setUserToken,
+  // })
 
   return (
-      <JotaiProvider initialValues={get()}>
+      // <JotaiProvider>
           <LazyMotion features={loadFramerMotionFeatures} strict={true}>
             {isMounted() ? (
               children
@@ -56,6 +56,6 @@ export function AppLayout({ children }: AppLayoutProps) {
               </ResponsiveContext.Provider>
             )}
           </LazyMotion>
-      </JotaiProvider>
+      // </JotaiProvider>
   )
 }

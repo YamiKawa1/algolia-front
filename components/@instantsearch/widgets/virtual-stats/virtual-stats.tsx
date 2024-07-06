@@ -22,16 +22,16 @@ function VirtualStatsComponent({
   nbSortedHits,
   areHitsSorted,
 }: VirtualStatsProps) {
-  const setStats = useUpdateAtom(statsAtom)
+  // const setStats = useUpdateAtom(statsAtom)
 
   useEffect(() => {
-    setStats({
-      processingTimeMS,
-      nbHits,
-      nbSortedHits,
-      areHitsSorted,
-    })
-  }, [setStats, processingTimeMS, nbHits, nbSortedHits, areHitsSorted])
+    // setStats({
+    //   processingTimeMS,
+    //   nbHits,
+    //   nbSortedHits,
+    //   areHitsSorted,
+    // })
+  }, [ processingTimeMS, nbHits, nbSortedHits, areHitsSorted])
 
   return null
 }

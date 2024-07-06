@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import { ProviderLayout } from '@/layouts/provider-layout'
-import { CartProducts } from '@/app/atomsInitial'
+import { CartProducts, CartUpdate } from '@/app/atomsInitial'
 export type ProductPageProps = SearchPageLayoutProps & {
   objectID: string
 }
@@ -20,7 +20,8 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
   const [cart, setCart] = useAtom(CartProducts)
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)
-    
+    const [update, setUpdate] = useAtom(CartUpdate)
+
     // const cart = useSelector((state) => state.cart.items)
     // const dispatch = useDispatch()
 
@@ -41,6 +42,8 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
         new_cart = [...cart, new_product]
       }
       setCart(new_cart)
+      localStorage.setItem('cart', JSON.stringify(new_cart))
+      setUpdate(!update)
     }
 
     const handleQuantity = (e:any, max:number) => {

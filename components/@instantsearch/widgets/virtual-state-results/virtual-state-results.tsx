@@ -11,30 +11,30 @@ export type VirtualStateResultsAtomValue = Partial<
   Pick<VirtualStateResultsProps, 'isSearchStalled' | 'searchResults'>
 >
 
-export const stateResultsAtom = atom<VirtualStateResultsAtomValue>({
-  searchResults: undefined,
-  isSearchStalled: undefined,
-})
+// export const stateResultsAtom = atom<VirtualStateResultsAtomValue>({
+//   searchResults: undefined,
+//   isSearchStalled: undefined,
+// })
 
-export const searchResultsAtom = selectAtom(
-  stateResultsAtom,
-  ({ searchResults }) => searchResults,
-  isEqual
-)
-export const isSearchStalledAtom = selectAtom(
-  stateResultsAtom,
-  ({ isSearchStalled }) => isSearchStalled
-)
+// export const searchResultsAtom = selectAtom(
+//   stateResultsAtom,
+//   ({ searchResults }) => searchResults,
+//   isEqual
+// )
+// export const isSearchStalledAtom = selectAtom(
+//   stateResultsAtom,
+//   ({ isSearchStalled }) => isSearchStalled
+// )
 
 function VirtualStateResultsComponent({
   searchResults,
   isSearchStalled,
 }: VirtualStateResultsProps) {
-  const setStateResults = useUpdateAtom(stateResultsAtom)
+  // const setStateResults = useUpdateAtom('stateResultsAtom')
 
-  useEffect(() => {
-    setStateResults({ searchResults, isSearchStalled })
-  }, [setStateResults, searchResults, isSearchStalled])
+  // useEffect(() => {
+  //   setStateResults({ searchResults, isSearchStalled })
+  // }, [setStateResults, searchResults, isSearchStalled])
 
   return null
 }

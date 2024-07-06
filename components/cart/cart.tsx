@@ -1,11 +1,10 @@
 import { Fragment, useEffect, useState } from 'react'
-import { useAtom, useSetAtom } from 'jotai'
+import { useAtom, useSetAtom, atom } from 'jotai'
 import { Dialog, Transition, TransitionChild, DialogPanel, DialogTitle } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { useDispatch, useSelector } from 'react-redux'
-import {removeItem, updateQuantity} from '@/app/cartSlice'
-import { CartProducts } from '@/app/atomsInitial'
+import { CartProducts, CartUpdate } from '@/app/atomsInitial'
 import Link from 'next/link'
+import { atomWithLocalStorage } from '@/app/atomsInitial'
 
 interface Iproduct{
   id: number,
@@ -18,10 +17,11 @@ interface Iproduct{
 export default function Cart({isOpen, setIsOpen}:any) {
   const [cart, setCart] = useAtom(CartProducts)
   const [total, setTotal] = useState(0)
+  const [update, setUpdate] = useAtom(CartUpdate)
+  
 
   const totalBill = () => {
     var total_bill = 0;
-    console.log('cart', cart);
     for (const product of cart){
       total_bill += product.quantity * product.price
     }  
@@ -30,24 +30,32 @@ export default function Cart({isOpen, setIsOpen}:any) {
 
   const handleQuantity = (id, quantity) => {
     const new_cart = [...cart]
-    console.log(id, quantity, new_cart);
     new_cart[id].quantity = quantity
     setCart([...new_cart])
+    localStorage.setItem('cart', JSON.stringify(new_cart))
+    setUpdate(!update)
   }
 
-  const handleRemoveItem = (id) => {
-    console.log(id);
-    
+  const handleRemoveItem = (id) => {    
     var new_cart = [...cart]
     const index = new_cart.findIndex(product => product.id == id)
-    console.log(index);
     new_cart.splice(index, 1)
     setCart([...new_cart])
+    localStorage.setItem('cart', JSON.stringify(new_cart))
+    setUpdate(!update)
   }
 
   useEffect(()=> {
+    const storage_cart = JSON.parse(localStorage.getItem('cart'))
+
+    if (storage_cart != null) {
+      setCart(storage_cart)
+    } else {
+      setCart([])
+    }
+    
     totalBill()
-  }, [cart])
+  }, [update])
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog className="relative z-header" onClose={setIsOpen}>

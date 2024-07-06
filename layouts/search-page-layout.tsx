@@ -31,8 +31,8 @@ function SearchPageLayoutComponent({
   userToken: initialUserToken,
   ...props
 }: SearchPageLayoutProps) {
-  const { searchParameters: configSearchParameters } = useAtomValue(configAtom)
-  const searchClient = useAtomValue(searchClientAtom)
+  // const { searchParameters: configSearchParameters } = useAtomValue(configAtom)
+  // const searchClient = useAtomValue(searchClientAtom)
   const userTokenHookValue = useUserToken()
   const userToken = userTokenHookValue ? userTokenHookValue : initialUserToken
 
@@ -40,16 +40,16 @@ function SearchPageLayoutComponent({
     () => ({
       userToken,
       enablePersonalization: Boolean(userToken),
-      ...configSearchParameters,
+      // ...configSearchParameters,
     }),
-    [userToken, configSearchParameters]
+    []
   )
 
   return (
     <BasicPageLayout>
       <Search
         indexName={indexName}
-        searchClient={searchClient}
+        searchClient={'searchClient'}
         searchParameters={searchParameters}
         resultsState={resultsState}
         {...props}
