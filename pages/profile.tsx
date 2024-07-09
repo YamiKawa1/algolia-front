@@ -110,20 +110,7 @@ export default function Profile() {
         alert(error)
       }
     }
-
-    const getPayments = async () => {
-      try {
-
-        const payments = await fetch(`${BACKEND_URL}/user/payments`, {
-        })
-  
-        } catch (error) {
-        
-        }
-      }
-
     getUser()
-    getPayments()
   }, [])
 
   return (

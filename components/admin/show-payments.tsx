@@ -26,6 +26,7 @@ export function ShowPayments() {
 const handlePaid = async (id) => {  
   try {
     const answer = window.confirm('¿Quieres marcar este pedido como pagado?')
+    
     if (answer) {
       var url =  `${BACKEND_URL}/payments/payment-paid/${id} `            
       var response = await fetch(url, {
@@ -142,7 +143,7 @@ const statusBottom = (status, id) => {
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + token_storage,
               }
             })
         
@@ -163,7 +164,7 @@ const statusBottom = (status, id) => {
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + token,
+              'Authorization': 'Bearer ' + token_storage,
             }
           })
           if (!response.ok) {

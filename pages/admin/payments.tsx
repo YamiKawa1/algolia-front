@@ -1,8 +1,6 @@
 import type { GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
-
-// import { Filter } from '@/components/index/filter'
-
+import { useRouter } from 'next/router'
 import { Container } from '@/components/container/container'
 import type { SearchPageLayoutProps } from '@/layouts/search-page-layout'
 import {
@@ -11,6 +9,8 @@ import {
 } from '@/layouts/search-page-layout'
 
 import { NavBottom } from '@/components/nav/nav-bottom'
+import { useEffect, useState } from 'react'
+const BACKEND_URL = 'http://localhost:3333'
 
 const ShowPayments = dynamic<any>(() =>
   import(
@@ -19,7 +19,31 @@ const ShowPayments = dynamic<any>(() =>
 )
 
 
-export default function Catalog(props: SearchPageLayoutProps) {
+export default function Payments(props: SearchPageLayoutProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    const token_storage = localStorage.getItem('token')
+    if (!token_storage){
+      router.push('/')
+    } 
+    const verifyToken = async() => {
+      const response = await fetch(`${BACKEND_URL}/user/is-admin`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token_storage,
+        }
+      })                  
+      
+      if (!response.ok) {
+        router.push('/')
+      }
+    }
+    verifyToken()
+
+  }, [])
   return (
     <SearchPageLayout {...props}>
       <Container className="flex flex-col gap-2 laptop:mt-10 laptop:gap-10">
@@ -31,4 +55,4 @@ export default function Catalog(props: SearchPageLayoutProps) {
 }
 
 export const getServerSideProps = (context: GetServerSidePropsContext) =>
-  getServerSidePropsPage(Catalog, context)
+  getServerSidePropsPage(Payments, context)

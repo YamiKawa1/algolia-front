@@ -12,7 +12,6 @@ import type { HeaderProps } from '@/components/header/header'
 import type { CartProps } from '@/components/cart/cart'
 import { AppLayout } from '@/layouts/app-layout'
 import { scrollToTop } from '@/utils/scrollToTop'
-import { ProviderLayout } from '@/layouts/provider-layout'
 import '@/styles/_index.css'
 
 export const Header = dynamic<HeaderProps>(() =>
@@ -38,7 +37,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
   // )
   const[isOpen, setIsOpen] = useState(false)
   return (
-    <ProviderLayout>
       <AppLayout>
           <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
           <Head>
@@ -53,7 +51,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
               <Component {...pageProps} key={router.route} />
           </AnimatePresence>
       </AppLayout>
-      </ProviderLayout>
 
   )
 }

@@ -8,7 +8,6 @@ import {
 } from '@/layouts/search-page-layout'
 import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
-import { ProviderLayout } from '@/layouts/provider-layout'
 import { CartProducts, CartUpdate } from '@/app/atomsInitial'
 export type ProductPageProps = SearchPageLayoutProps & {
   objectID: string
@@ -72,7 +71,6 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
     }, []);
 
     return (
-      <ProviderLayout>
         <SearchPageLayout {...props}>
             <Container>
               <div className="py-8">
@@ -115,7 +113,6 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
               </div>
             </Container>
         </SearchPageLayout>
-      </ProviderLayout>
   )
 }
 
