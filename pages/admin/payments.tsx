@@ -38,7 +38,14 @@ export default function Payments(props: SearchPageLayoutProps) {
       })                  
       
       if (!response.ok) {
-        router.push('/')
+        const data = await response.json()
+        if (data.message == 'token expired') {
+          localStorage.removeItem('token')
+          location.reload();
+          router.push('/')
+        } else {
+          router.push('/')
+        }
       }
     }
     verifyToken()

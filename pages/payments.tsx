@@ -38,7 +38,7 @@ export default function Profile() {
                 'Authorization': 'Bearer ' + token,
               }
             })
-        
+            
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -53,8 +53,14 @@ export default function Profile() {
               'Authorization': 'Bearer ' + token,
             }
           })
+
           if (!response.ok) {
             const data = await response.json()
+            if (data.message == 'token expired') {
+              localStorage.removeItem('token')
+              location.reload();
+              router.push('/')
+            }
             alert(data.message)
           } else {
             response = await response.json()            

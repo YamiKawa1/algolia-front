@@ -159,7 +159,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                       <div className="mt-6">
                       <Link href="/checkout">
                         <a className='flex items-center justify-center rounded-md border border-transparent bg-orange-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400'>
-                          Checkout
+                          Comprar
                         </a>
                       </Link>
 

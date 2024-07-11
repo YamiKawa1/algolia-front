@@ -40,15 +40,12 @@ export function NavTop({setIsOpen}:any) {
           </Link>
         </div>
 
-        <div className="flex gap-48">
+        <div className="flex gap-48 text-green-700">
           <div className="hidden items-center gap-8 laptop:flex">
             <a href="https://maps.app.goo.gl/2tWy9tY6sbE5LfRU6" target="_blank" rel="noopener noreferrer">
-              <IconLabel
-                icon={PinDropIcon}
-                label="Tienda"
-                labelPosition="right"
-                classNameLabel="label-regular"
-              />
+              <Button title="Tienda">
+                <IconLabel icon={PinDropIcon} label="Tienda" />
+              </Button>
             </a>
           </div>
 
@@ -67,7 +64,7 @@ export function NavTop({setIsOpen}:any) {
                   <IconLabel icon={PersonIcon} label="Perfil" />
                 </Tablet>
                 <Laptop>
-                  <IconLabel icon={PersonIcon} />
+                  <IconLabel icon={PersonIcon} label="Perfil" />
                 </Laptop>
               </Button>
             </Link>}
@@ -77,7 +74,7 @@ export function NavTop({setIsOpen}:any) {
                   <IconLabel icon={ViewListIcon} label="Pedidos" />
                 </Tablet>
                 <Laptop>
-                  <IconLabel icon={ViewListIcon} />
+                  <IconLabel icon={ViewListIcon} label="Pedidos" />
                 </Laptop>
               </Button>
             </Link>}
@@ -87,7 +84,7 @@ export function NavTop({setIsOpen}:any) {
                   <IconLabel icon={LoginIcon} label="Entrar" />
                 </Tablet>
                 <Laptop>
-                  <IconLabel icon={LoginIcon} />
+                  <IconLabel icon={LoginIcon} label="Entrar" />
                 </Laptop>
               </Button>
             </Link>}
@@ -97,7 +94,7 @@ export function NavTop({setIsOpen}:any) {
                   <IconLabel icon={LogoutIcon} label="Salir" />
                 </Tablet>
                 <Laptop>
-                  <IconLabel icon={LogoutIcon} />
+                  <IconLabel icon={LogoutIcon} label="Salir" />
                 </Laptop>
               </Button>
             </Link>}
@@ -108,7 +105,7 @@ export function NavTop({setIsOpen}:any) {
                 <IconLabel icon={ShoppingCartIcon} label="Carrito" />
               </Tablet>
               <Laptop>
-                <IconLabel icon={ShoppingCartIcon} />
+                <IconLabel icon={ShoppingCartIcon} label="Carrito" />
               </Laptop>
             </Button>
           </div>

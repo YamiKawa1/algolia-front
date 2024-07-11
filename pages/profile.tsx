@@ -97,7 +97,12 @@ export default function Profile() {
           }
         })
         if (!response.ok) {
-          const data = await response.json()          
+          const data = await response.json()        
+          if (data.message == 'token expired') {
+            localStorage.removeItem('token')
+            location.reload();
+            router.push('/')
+          }
           alert(data.message)
         } else {
           const data = await response.json()

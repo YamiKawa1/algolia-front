@@ -102,7 +102,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
                                     <h5 className="font-bold ">Quedan: {product.availableQuantity}</h5>
                             </div>
                             <div className='mt-2'> 
-                                <span className="font-bold">Descripcion:</span>
+                                <span className="font-bold">Descripción:</span>
                                 <p className="mt-2">
                                   {product.description}
                                 </p>

@@ -78,7 +78,7 @@ export function CreateCategory({open, setOpen, action, setAction}) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <DialogPanel className="transform w-1/3 m-auto overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+              <DialogPanel className="transform w-full m-auto overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all tablet:w-1/2 tablet:max-w-lg">
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -95,7 +95,7 @@ export function CreateCategory({open, setOpen, action, setAction}) {
                             className="inline-flex w-full justify-center rounded-md bg-orange-500 hover:bg-orange-400 px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                             onClick={() => {handleCreateCategory}}
                           >
-                            Confirm
+                            Confirmar
                           </button>
                           <button
                           type="button"
@@ -103,7 +103,7 @@ export function CreateCategory({open, setOpen, action, setAction}) {
                           onClick={() => {setOpen(false)}}
                           data-autofocus
                         >
-                          Cancel
+                          Cancelar
                         </button>
                       </form>                      
                     </div>
