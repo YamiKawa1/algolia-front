@@ -42,10 +42,8 @@ export default function Payments(props: SearchPageLayoutProps) {
         if (data.message == 'token expired') {
           localStorage.removeItem('token')
           location.reload();
-          router.push('/')
-        } else {
-          router.push('/')
-        }
+        } 
+        router.push('/')
       }
     }
     verifyToken()

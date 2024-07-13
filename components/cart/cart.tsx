@@ -157,7 +157,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                         <p>${total}</p>
                       </div>
                       <div className="mt-6">
-                      <Link href="/checkout">
+                      <Link href={cart.length > 0 ? "/checkout": ""}>
                         <a className='flex items-center justify-center rounded-md border border-transparent bg-orange-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-400'>
                           Comprar
                         </a>

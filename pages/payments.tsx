@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 const BACKEND_URL = 'http://localhost:3333'
 
-export default function Profile() {
+export default function Payments() {
   const [search, setSearch] = useState('')
   const [payments, setPayments] = useState([])
   const [bill, setBill] = useState([])
@@ -27,6 +27,7 @@ export default function Profile() {
     }
     const getPayments = async () =>{ 
       try {
+        
         var url;
         if (search) {
             url = `${BACKEND_URL}/user/payments/${search}`

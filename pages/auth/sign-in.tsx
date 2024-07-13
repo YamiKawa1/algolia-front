@@ -14,7 +14,6 @@ export default function Example() {
       email,
       password
     }
-    try {
       var response = await fetch(`${BACKEND_URL}/auth/log-in`, {
         method: 'POST',
         headers: {
@@ -22,23 +21,33 @@ export default function Example() {
           'Content-Type': 'application/json'
         },  
         body: JSON.stringify(data)
-      })
+      })      
       if (response.status == 404) {
         alert('Credenciales erroneas')
       } 
       if (!response.ok) {
-        alert('hubo un error inesperado')
+        const data = await response.json() 
+        
+        alert(data.message)
       } else{
         response = await response.json()
-        
         localStorage.setItem('token', response.body)
+
+        const isAdmin = await fetch(`${BACKEND_URL}/user/is-admin`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + response.body,
+        }
+      }) 
+      if (isAdmin.ok){
+        router.push('/admin/products')
+      } else {
         router.push('/')
+      }    
 
       }  
-    } catch (error) {
-      alert(error)
-    }
-    
   }
 
   useEffect(()=> {    

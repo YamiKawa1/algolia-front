@@ -156,14 +156,14 @@ useEffect(() => {
 
                           <button
                             type="button"
-                            className="inline-flex w-full justify-center rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 sm:ml-3 sm:w-auto"
+                            className="inline-flex w-full justify-center rounded-md bg-green-700 hover:bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                             onClick={() => {handleUpdateProduct()}}
                           >
                             Confirmar
                           </button>
                           <button
                           type="button"
-                          className="inline-flex mt-3 w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                          className="inline-flex mt-3 w-full justify-center rounded-md bg-orange-500 hover:bg-orange-400 px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                           onClick={() => setOpen(false)}
                           data-autofocus
                         >
