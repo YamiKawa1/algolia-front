@@ -139,7 +139,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
                                         onClick={() => {handleRemoveItem(product.id)}}
                                         className="font-medium text-green-700 hover:text-green-600"
                                       >
-                                        Remove
+                                        Eliminar
                                       </button>
                                     </div>
                                   </div>

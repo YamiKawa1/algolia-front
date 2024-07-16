@@ -82,7 +82,7 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
                             </div>
                             <div className="flex -mx-2 mb-4">
                                 <div className="w-1/2 px-2">
-                                    <button onClick={() => {addToCart(product)}} className="w-full bg-orange-500 hover:bg-orange-400 text-white py-2 px-4 rounded-full font-bold">Add to Cart</button>
+                                    <button onClick={() => {addToCart(product)}} className="w-full bg-orange-500 hover:bg-orange-400 text-white py-2 px-4 rounded-full font-bold">Añadir al carrito</button>
                                 </div>
                                 <div className="w-1/2 px-2">
                                     <input type='number' onChange={(e) => {handleQuantity(e, product.availableQuantity)}} defaultValue={1} className="w-full text-center py-2 px-4 border rounded-full font-bold" />

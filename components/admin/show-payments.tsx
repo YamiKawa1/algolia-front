@@ -237,6 +237,9 @@ const statusBottom = (status, id) => {
                             Dirección
                           </th>
                           <th className="px-3 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            Teléfono
+                          </th>
+                          <th className="px-3 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                             Creado
                           </th>
                           <th className="px-3 text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
@@ -275,6 +278,9 @@ const statusBottom = (status, id) => {
                             </td>
                             <td className="border-t-0 text-center px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                               {payment.address}
+                            </td>
+                            <td className="border-t-0 text-center px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                              {payment.phone}
                             </td>
                             <td className="border-t-0 text-center px-3 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                               {payment.created_at}

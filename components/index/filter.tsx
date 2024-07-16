@@ -78,7 +78,7 @@ export function Filter({setCategory, setOrder, setCategoryName, setSearch}: any)
               >
                 <DialogPanel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
-                    <h2 className="text-lg font-medium text-gray-900">Search Category</h2>
+                    <h2 className="text-lg font-medium text-gray-900">Categorías</h2>
                     <button
                       type="button"
                       className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
@@ -171,7 +171,7 @@ export function Filter({setCategory, setOrder, setCategoryName, setSearch}: any)
                 className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
                 onClick={() => setMobileFiltersOpen(true)}
               >
-                <span className="sr-only">Search Category</span>
+                <span className="sr-only">Categorías</span>
                 <FunnelIcon className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>

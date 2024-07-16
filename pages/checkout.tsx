@@ -11,6 +11,7 @@ export default function Checkout() {
   const [paymentPlatforms, setPaymentPlatforms] = useState([])
   const [paymentPlatform, setPaymentPlatform] = useState(null)
   const [address, setAddress] = useState('')
+  const [phone, setPhone] = useState('')
   const [transferenceId, setTransferenceId] = useState('')
   const [total, setTotal] = useState(0)
 
@@ -85,6 +86,7 @@ export default function Checkout() {
           setTotal(0)
           setTransferenceId('')
           setAddress('')
+          setPhone('')
           setCart([])
           localStorage.setItem('cart', JSON.stringify([]))
           setUpdate(!update)
@@ -158,6 +160,7 @@ export default function Checkout() {
             response = await response.json()
             
             setAddress(response.body.address)
+            setPhone(response.body.phone)
           }
       } catch (error) {
         alert(error)
@@ -176,7 +179,7 @@ export default function Checkout() {
             <div className="">
               <div className='relative'>
                 <select onClick={(e) => {setPaymentPlatform(e.target.value)}} className="bg-gray-50 rounded-md border border-gray-200 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2">
-                  <option value=''>Elija un tipo de pago</option>
+                  <option value=''>Seleccione un tipo de pago</option>
                   {paymentPlatforms && paymentPlatforms.map((platform) => {
                     return(
                       <option value={platform.id}>{platform.name} {platform.account}</option>
@@ -187,7 +190,7 @@ export default function Checkout() {
               <p className='pl-4 m-2'>{showAccount()}</p>
               <div className='relative'>
                 <select onClick={(e) => {setRequireAddress(e.target.value)}} className="bg-gray-50 rounded-md border border-gray-200 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2">
-                  <option value=''>Elija delivery o recoger en tienda</option>
+                  <option value=''>Seleccione delivery o recoger en tienda</option>
                   <option value='si'>Delivery</option>
                   <option value='no'>Recoger en tienda</option>
                 </select>
@@ -200,7 +203,13 @@ export default function Checkout() {
                   <input type="text" defaultValue={address} onChange={(e) => {setAddress(e.target.value)}} className="w-full rounded-md border border-gray-200 px-4 py-3 pl-4 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="" />
                 </div>
                 </Fragment>
-              }                
+              }      
+              <Fragment>
+                <label className="mt-4 mb-2 block text-sm font-medium">Teléfono</label>
+                <div className="relative">
+                  <input type="text" defaultValue={phone} onChange={(e) => {setPhone(e.target.value)}} className="w-full rounded-md border border-gray-200 px-4 py-3 pl-4 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="" />
+                </div>
+              </Fragment>          
               {paymentPlatform != 1 && 
                   <Fragment>
                   <label className="mt-4 mb-2 block text-sm font-medium">ID de transferencia</label>
@@ -217,7 +226,7 @@ export default function Checkout() {
                   <p className="font-semibold text-gray-900">${total}</p>
                 </div>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-gray-900">Shipping</p>
+                  <p className="text-sm font-medium text-gray-900">Envío</p>
                   <p className="font-semibold text-gray-900">$4.00</p>
                 </div>
               </div>
@@ -226,7 +235,7 @@ export default function Checkout() {
                 <p className="text-2xl font-semibold text-gray-900">${total + 4}</p>
               </div>
             </div>
-            <button type="submit" onClick={() => {handleMakePayment()}} className="mt-4 mb-8 w-full rounded-md bg-orange-500 hover:bg-orange-400 px-6 py-3 font-medium text-white">Place Order</button>
+            <button type="submit" onClick={() => {handleMakePayment()}} className="mt-4 mb-8 w-full rounded-md bg-orange-500 hover:bg-orange-400 px-6 py-3 font-medium text-white">Realizar pedido</button>
           </div>
         </div>
       </div>

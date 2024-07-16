@@ -146,7 +146,7 @@ export default function Example() {
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 tablet:text-sm tablet:leading-6 pl-2"
                   />
                 </div>
-                <p className={passEqual? "text-red-500": "hidden"}>holis, tu contraseña no coinside</p>
+                <p className={passEqual? "text-red-500": "hidden"}>Tu contraseña no coincide</p>
               </div>
   
               <div>
@@ -155,7 +155,7 @@ export default function Example() {
                   onClick={() => {handleSignUp()}}
                   className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                 >
-                  Crear
+                  Crear cuenta
                 </button>
               </div>
               <div className="text-sm">
