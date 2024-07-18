@@ -25,6 +25,7 @@ export default function Cart({isOpen, setIsOpen}:any) {
     for (const product of cart){
       total_bill += product.quantity * product.price
     }  
+    total_bill = Number.parseFloat(total_bill.toFixed(2))
     setTotal(total_bill)
   }
 

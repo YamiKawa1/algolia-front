@@ -9,6 +9,8 @@ const totalBill = (products) => {
   for (const product of products){
     total += product.quantity * product.price
   }
+  total = Number.parseFloat(total.toFixed(2))
+
   return total
 }
   return (
