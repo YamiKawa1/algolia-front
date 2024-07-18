@@ -62,7 +62,8 @@ export default function Checkout() {
         products: cart,
         transference_id: transferenceId,
         total: total + 4,
-        address: address
+        address: address,
+        phone: phone
       }
 
       
