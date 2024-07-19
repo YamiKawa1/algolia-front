@@ -1,5 +1,5 @@
 import type { GetServerSidePropsContext } from 'next'
-
+import { Footer } from '@/components/footer/footer'
 import { Container } from '@/components/container/container'
 import type { SearchPageLayoutProps } from '@/layouts/search-page-layout'
 import {
@@ -71,6 +71,8 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
     }, []);
 
     return (
+      <div>
+
         <SearchPageLayout {...props}>
             <Container>
               <div className="py-8">
@@ -113,6 +115,9 @@ export default function Product({ objectID, ...props }: ProductPageProps) {
               </div>
             </Container>
         </SearchPageLayout>
+      <Footer/>
+        
+      </div>
   )
 }
 

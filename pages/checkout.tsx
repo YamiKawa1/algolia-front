@@ -1,8 +1,9 @@
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { useAtom } from 'jotai'
 import { CartProducts, CartUpdate } from '@/app/atomsInitial'
 import { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Footer } from '@/components/footer/footer'
+
 const BACKEND_URL = 'http://localhost:3333'
 
 export default function Checkout() {
@@ -174,6 +175,7 @@ export default function Checkout() {
 
   }, [])
   return (
+    <div>
       <div className="space-y-12 px-10 mx-10 pt-10">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
@@ -240,6 +242,8 @@ export default function Checkout() {
             <button type="submit" onClick={() => {handleMakePayment()}} className="mt-4 mb-8 w-full rounded-md bg-orange-500 hover:bg-orange-400 px-6 py-3 font-medium text-white">Realizar pedido</button>
           </div>
         </div>
+      </div>
+      <Footer/>
       </div>
   )
 }

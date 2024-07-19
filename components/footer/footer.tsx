@@ -6,8 +6,8 @@ export type FooterProps = Record<string, unknown>
 
 export const Footer = memo(function Footer() {
   return (
-    <footer className="mt-auto">
-      <div className="hidden bg-neutral-lightest justify-between px-20 py-24 laptop:flex">
+    <footer className="mt-10">
+      <div className="flex bg-neutral-lightest justify-between px-20 py-48">
         <div key={1} className="flex flex-col gap-2">
             <div className="label-semibold">Contactos</div>
               <ul className="small-regular flex flex-col gap-2">

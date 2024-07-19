@@ -4,6 +4,7 @@ import { SearchBar } from '@/components/index/searchBar';
 import {TrashIcon, ArrowPathIcon, ShoppingCartIcon} from '@heroicons/react/20/solid'
 import SeeBill from '@/components/modals/see-bill';
 import { useRouter } from 'next/router';
+import { Footer } from '@/components/footer/footer'
 
 const BACKEND_URL = 'http://localhost:3333'
 
@@ -155,6 +156,7 @@ export default function Payments() {
             </div>
           </section>
       </Container>
+      <Footer />
     </div>
   )
 }

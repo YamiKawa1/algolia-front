@@ -1,51 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-
-const products =[{
-  id: 854654652,
-  status: 'active',
-  bill_id: 21654545,
-  user_id: 5,
-  total: 26,
-  address: 475.00,
-  created_at: '28/06/2024'
-},
-{
-  id: 23,
-  status: 'active',
-  bill_id: 21654545,
-  user_id: 5,
-  total: 26,
-  address: 475.00,
-  created_at: '28/06/2024'
-},
-{
-  id: 42,
-  status: 'active',
-  bill_id: 21654545,
-  user_id: 5,
-  total: 26,
-  address: 475.00,
-  created_at: '28/06/2024'
-},
-{
-  id: 43,
-  status: 'active',
-  bill_id: 21654545,
-  user_id: 5,
-  total: 26,
-  address: 475.00,
-  created_at: '28/06/2024'
-},
-{
-  id: 44,
-  status: 'active',
-  bill_id: 21654545,
-  user_id: 5,
-  total: 26,
-  address: 475.00,
-  created_at: '28/06/2024'
-}]
+import { Footer } from '@/components/footer/footer'
 
 const BACKEND_URL = 'http://localhost:3333'
 
@@ -119,6 +74,7 @@ export default function Profile() {
   }, [])
 
   return (
+    <div>
     <div>
       <form>
         <div className="space-y-12 px-10 mx-10">
@@ -211,6 +167,8 @@ export default function Profile() {
           </button>
         </div>
       </form>
+    </div>
+            <Footer/>
     </div>
   )
 }
