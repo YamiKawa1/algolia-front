@@ -31,8 +31,12 @@ export default function Profile() {
         },  
         body: JSON.stringify(send_data)
       })      
+      if (!response.ok) {
+        const data = await response.json()
+        alert(data.message)
+        }
     } catch (error) {
-      
+
     }
   }
 
@@ -129,7 +133,7 @@ export default function Profile() {
               </div>
 
               <div className="tablet:col-span-3">
-                <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+                <label className="block text-sm font-medium leading-6 text-gray-900">
                   Contraseña
                 </label>
                 <div className="mt-2">
