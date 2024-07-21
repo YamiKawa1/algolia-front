@@ -5,7 +5,7 @@ import PinDropIcon from '@material-design-icons/svg/outlined/pin_drop.svg'
 import LoginIcon from '@material-design-icons/svg/outlined/login.svg'
 import ShoppingCartIcon from '@material-design-icons/svg/outlined/shopping_cart.svg'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 
 import { Tablet, Laptop } from '@/lib/media'
 import { Button } from '@ui/button/button'
@@ -18,6 +18,7 @@ const BACKEND_URL = 'http://localhost:3333'
 export function NavTop({setIsOpen}:any) {
   const [token, setToken] = useState()
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isAuth, setIsAuth] = useState(false)
   const router = useRouter()
   
   const Logout = () => {
@@ -28,7 +29,11 @@ export function NavTop({setIsOpen}:any) {
 
   useEffect(() => {
     const token_storage = localStorage.getItem('token')
-
+    if (router.pathname.includes('auth')) {
+      setIsAuth(true)      
+    } else {
+      setIsAuth(false)      
+    }
     const verifyToken = async() => {
       const response = await fetch(`${BACKEND_URL}/user/is-admin`, {
         method: 'GET',
@@ -78,7 +83,6 @@ export function NavTop({setIsOpen}:any) {
                   </Button>
                 </a>
               </div>
-    
               <div className="flex items-center gap-6 laptop:gap-3 text-green-700">
                 <Tablet>
                 <a href="https://maps.app.goo.gl/2tWy9tY6sbE5LfRU6" target="_blank" rel="noopener noreferrer">
@@ -87,7 +91,9 @@ export function NavTop({setIsOpen}:any) {
                 </Button>
                 </a>
                 </Tablet>
-                {token && <Link href="/profile">
+                {!isAuth && 
+                  <Fragment>
+                                    {token && <Link href="/profile">
                   <Button title="Perfil">
                     <Tablet>
                       <IconLabel icon={PersonIcon} label="Perfil" />
@@ -137,6 +143,10 @@ export function NavTop({setIsOpen}:any) {
                     <IconLabel icon={ShoppingCartIcon} label="Carrito" />
                   </Laptop>
                 </Button>
+
+                  </Fragment>
+                }
+
               </div>
             </div>
           </div>    
